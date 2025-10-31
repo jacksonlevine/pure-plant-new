@@ -1,6 +1,9 @@
 ﻿---
 import menu from "../CONFIG/menu.json"
-
+import PurePlantLogo from "./PurePlantLogo.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro"
+import SearchBar from "../functional-components/SearchBar";
+import Cart from "../functional-components/cart/Cart.astro"
 const isMenuItemActive = (url: string) => {
     const pathname = Astro.url.pathname;
     if (url === "/") {
@@ -27,7 +30,7 @@ const isParentActive = (children: any[]) => {
         <div
                 class="order-1 flex items-center justify-between space-x-7 lg:space-x-14"
         >
-            <!-- TODO <Logo />-->
+            <PurePlantLogo/>
 
             <div class="relative z-40 hidden md:block">
                 <label
@@ -58,7 +61,7 @@ const isParentActive = (children: any[]) => {
                         class="fixed top-0 left-0 h-full bg-white dark:bg-darkmode-body overflow-y-auto w-full md:w-96 p-9 sidebar transform -translate-x-full transition-transform"
                 >
                     <div class="flex justify-between items-center mb-14">
-                        <!--TODO <Logo />-->
+                        <PurePlantLogo/>
                         <button class="close-sidebar p-2">
                             <svg class="h-5 fill-current block" viewBox="0 0 20 20">
                                 <title>Menu Close</title>
@@ -140,18 +143,18 @@ const isParentActive = (children: any[]) => {
                             ))
                         }
 
-                        <!--{-->
-                        <!--    navigation_button.enable && (-->
-                        <!--                <li class="mt-4 inline-block lg:hidden mr-4 md:mr-6">-->
-                        <!--                    <a-->
-                        <!--                            class="btn btn-outline-primary btn-sm"-->
-                        <!--                            href={navigation_button.link}-->
-                        <!--                    >-->
-                        <!--                        {navigation_button.label}-->
-                        <!--                    </a>-->
-                        <!--                </li>-->
-                        <!--    )-->
-                        <!--}-->
+                        {
+                            (
+                                        <li class="mt-4 inline-block lg:hidden mr-4 md:mr-6">
+                                            <a
+                                                    class="btn btn-outline-primary btn-sm"
+                                                    href={"localhost"}
+                                            >
+                                                {"Test test"}
+                                            </a>
+                                        </li>
+                            )
+                        }
                         
                     </ul>
                 </div>
@@ -159,12 +162,12 @@ const isParentActive = (children: any[]) => {
         </div>
 
         <div class="max-lg:mt-4 w-full lg:w-[45%] xl:w-[60%] lg:order-2 order-3">
-            <!-- TODO <SearchBar client:load />-->
+            <SearchBar client:load />
         </div>
 
         <div class="order-2 lg:order-3 ml-auto flex items-center lg:ml-0">
-            <!--TODO <ThemeSwitcher className="mr-4 md:mr-6" />-->
-            <!-- TODO <Cart />-->
+            <ThemeSwitcher className="mr-4 md:mr-6" />
+            <Cart />
 
             
                 
@@ -204,7 +207,7 @@ const isParentActive = (children: any[]) => {
                 >
                     {/* Same navigation list as desktop but for mobile */}
                     <div class="flex justify-between items-center mb-14">
-                        <!--TODO <Logo />-->
+                        <PurePlantLogo/>
                         <button class="close-sidebar-mobile p-2">
                             <svg class="h-5 fill-current block" viewBox="0 0 20 20">
                                 <title>Menu Close</title>
