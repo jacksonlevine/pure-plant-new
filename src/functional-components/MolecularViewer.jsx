@@ -142,12 +142,9 @@ const PointCloudBillboard = () => {
         return () => {
             clearInterval(cycle);
             cancelAnimationFrame(frameId);
-            ro.disconnect(); // important
-            if (mountRef.current && renderer.domElement) {
-                mountRef.current.removeChild(renderer.domElement);
-            }
+            ro.disconnect();
+            controls.dispose();
 
-            // dispose scene objects
             scene.traverse((obj) => {
                 if (obj.geometry) obj.geometry.dispose();
                 if (obj.material) {
@@ -155,8 +152,13 @@ const PointCloudBillboard = () => {
                     else obj.material.dispose();
                 }
             });
+
             dotTexture.dispose();
+
             renderer.dispose();
+            if (mountRef.current && renderer.domElement.parentNode === mountRef.current) {
+                mountRef.current.removeChild(renderer.domElement);
+            }
         };
     }, []);
 
