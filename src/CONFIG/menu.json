@@ -2,11 +2,11 @@
   "main": [
     {
       "name": "Home",
-      "url": "/"
+      "url": "/pure-plant-new/"
     },
     {
       "name": "Products",
-      "url": "/products"
+      "url": "/pure-plant-new/products"
     },
     {
       "name": "Pages",
@@ -15,45 +15,45 @@
       "children": [
         {
           "name": "About",
-          "url": "/about"
+          "url": "/pure-plant-new/about"
         },
         {
           "name": "Contact",
-          "url": "/contact"
+          "url": "/pure-plant-new/contact"
         },
         {
           "name": "404 Page",
-          "url": "/404"
+          "url": "/pure-plant-new/404"
         }
       ]
     },
     {
       "name": "Contact",
-      "url": "/contact"
+      "url": "/pure-plant-new/contact"
     }
   ],
   "footer": [
     {
       "name": "About",
-      "url": "/about"
+      "url": "/pure-plant-new/about"
     },
     {
       "name": "Products",
-      "url": "/products"
+      "url": "/pure-plant-new/products"
     },
     {
       "name": "Contact",
-      "url": "/contact"
+      "url": "/pure-plant-new/contact"
     }
   ],
   "footerCopyright": [
     {
       "name": "Privacy & Policy",
-      "url": "/privacy-policy"
+      "url": "/pure-plant-new/privacy-policy"
     },
     {
       "name": "Terms of Service",
-      "url": "/terms-services"
+      "url": "/pure-plant-new/terms-services"
     }
   ]
 }
