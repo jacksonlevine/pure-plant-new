@@ -1,5 +1,5 @@
 import plugin from "tailwindcss/plugin";
-import themeConfig from "../config/theme.json";
+import themeConfig from "../CONFIG/theme.json";
 
 // Helper to extract a clean font name.
 const findFont = (fontStr) =>
