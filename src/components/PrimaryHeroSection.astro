@@ -26,4 +26,133 @@ const testimonials = [
     {text: "I feel more focused and alert every single day", author: "Emily T."},
     {text: "High-quality ingredients that I can actually trust", author: "David L."},
 ];
+
+import landing1 from "/videos/landing.mp4";
+import landingmobile from "/videos/landing_mobile.mp4";
+
+import MolecularViewer from "../functional-components/MolecularViewer";
 ---
+
+<div data-vid-background-container class="max-w-screen">
+    {/* Using a video html element for background for now.
+         TODO: Looking into smaller sizes for smaller screens for performance */}
+
+
+    <div class="relative w-screen max-h-screen min-h-screen max-w-screen lg:px-[12rem] overflow-y-visible">
+
+        <video
+                class="absolute top-0 left-0 w-screen h-full object-cover -z-20"
+                autoplay
+                loop
+                muted
+                preload="auto"
+                playsinline
+        >
+            <source src={landing1} media="(max-width: 768px)" type="video/mp4"/>
+            <source src={landingmobile} type="video/mp4"/>
+        </video>
+
+        {/* Heres a brief experiment I tried with displaying 3d assets, 
+        (From implementation bible: Premium glass packaging (amber glass for PurePlantD3®, flint glass for Serophan® and Neurozine®) with elegant lighting). 
+        Works, but will depend on quality assets to look good*/}
+
+        {/*       
+        <div class="absolute flex flex-row items-center justify-center w-fit h-fit p-8 text-center text-white">
+
+          <Model3D
+            src="/models/bottleexample.glb"
+            alt="alt text"
+            size={{ width: "400px", height: "600px" }}
+          />
+          <Model3D
+            src="/models/bottleexample.glb"
+            alt="alt text"
+            size={{ width: "400px", height: "600px" }}
+          />
+          <Model3D
+            src="/models/bottleexample.glb"
+            alt="alt text"
+            size={{ width: "400px", height: "600px" }}
+          />
+        </div> */}
+        <div class="flex w-full h-full flex-col lg:items-center z-50">
+            <div class="flex w-full flex-col lg:flex-row justify-center">
+                {/* Half 1*/}
+                <div class="flex w-full justify-start lg:justify-start lg:min-h-[66.6667vh]">
+                    <div class="absolute inset-0
+                        backdrop-blur-xs
+                        bg-white/30
+                          backdrop-brightness-100
+                          pointer-events-none
+                          z-0
+                          mask-y-from-80% mask-y-to-100%
+                          mask-x-from-80% mask-x-to-100%
+                          ">
+                    </div>
+                    <div class="relative flex flex-col justify-around lg:items-center  h-full text-white">
+                        {/*        <div class="absolute inset-0*/}
+                        {/*backdrop-blur-xs*/}
+                        {/*bg-white/30*/}
+                        {/*  backdrop-brightness-100*/}
+                        {/*  pointer-events-none*/}
+                        {/*  z-0*/}
+                        {/*  mask-y-from-80% mask-y-to-100%*/}
+                        {/*  mask-x-from-80% mask-x-to-100%*/}
+                        {/*  ">*/}
+                        {/*        </div>*/}
+
+                        <div class="z-[0] flex flex-col justify-start px-4 animate-fi">
+                            <div class="flex object-contain w-full">
+                                <h1
+                                        class="!text-4xl xl:!text-7xl lg:min-h-fit md:!text-5xl font-bold animate-float h-fit w-full">
+                                    {selectedContent.hook}
+                                </h1>
+                            </div>
+
+                            <h2 class="text-3xl font-semibold">
+                                {selectedContent.headline}
+                            </h2>
+                            <h2 class="text-3xl !font-extralight leading-tight ">
+                                {selectedContent.subheadline}
+                            </h2>
+                            <h2 class="text-3xl font-semibold">
+                                {selectedContent.credibility}
+                            </h2>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                {/* End of Half 1 */}
+                {/* Half 2 */}
+                <div class="flex w-full min-h-[66.6667vh] min-w-[10px] lg:block overflow-visible z-10 transition-all duration-200 hover:scale-105">
+                    <MolecularViewer client:load/>
+                </div>
+
+                {/* End of half 2 */}
+            </div>
+
+
+            <div class="flex flex-col lg:flex-row justify-between max-w-screen lg:py-20  w-full">
+
+                {/*<button class="z-50" onClick={*/}
+                {/*    () => {*/}
+                {/*        gtag("event", "cta_click", {*/}
+                {/*            selected_option: selectedOption,*/}
+                {/*            label: "PrimaryHero_CTA",*/}
+                {/*        });*/}
+                {/*    }*/}
+                {/*}>Test</button>*/}
+                <!--<Testimonials testimonials={testimonials}/>-->
+
+                <!--<CTAButton label={selectedContent.cta} to="/productoverview" />-->
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

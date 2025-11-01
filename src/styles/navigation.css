@@ -99,3 +99,4 @@
 .footer-link {
   @apply text-sm md:text-base font-medium transition text-text-light hover:text-text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary;
 }
+

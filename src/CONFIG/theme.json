@@ -31,7 +31,7 @@
   },
   "fonts": {
     "font_family": {
-      "primary": "Karla:wght@400;500;700",
+      "primary": "Lato:wght@400;500;700",
       "primary_type": "sans-serif",
       "secondary": "",
       "secondary_type": ""
@@ -40,5 +40,6 @@
       "base": "16",
       "scale": "1.2"
     }
-  }
+  },
+  "version": 3
 }
