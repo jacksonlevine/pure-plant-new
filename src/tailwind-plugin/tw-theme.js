@@ -133,5 +133,15 @@ module.exports = plugin.withOptions(() => {
       },
       { values: colorsMap, type: "color" },
     );
+
+      addBase({
+          ".invert-dark": {
+              filter: "invert(0)",
+              transition: "filter 0.3s ease",
+          },
+          ".dark .invert-dark": {
+              filter: "invert(1)",
+          },
+      });
   };
 });

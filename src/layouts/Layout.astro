@@ -2,6 +2,8 @@
 import {ClientRouter} from "astro:transitions";
 import Header from "../components/Header.astro";
 import "../styles/main.css";
+const {TopElement } = Astro.props;
+
 ---
 
 <!doctype html>
@@ -15,7 +17,15 @@ import "../styles/main.css";
         <ClientRouter/>
 	</head>
 	<body>
-        <Header />
+        <div>
+            {TopElement && <div class="absolute left-0 top-0">
+                <TopElement class="pt-6"/>
+            </div>}
+            
+            <Header />
+        </div>
+        {TopElement && <div class="h-[100vh]"></div>}
+        
 		<slot />
 	</body>
 </html>
