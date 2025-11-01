@@ -79,7 +79,7 @@ const CartModal: React.FC = () => {
               </div>
               <p>Oops. Your Bag Is Empty.</p>
               <a href="/products" className="btn btn-primary w-full">
-                Don't Miss Out: Add Product
+                Go to products
               </a>
             </div>
           </div>
