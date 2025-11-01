@@ -9,5 +9,7 @@ export default defineConfig({
       plugins: [tailwindcss()],
   },
 
-  integrations: [react(), mdx()],
+  integrations: [react(), mdx()], 
+    site: 'https://jacksonlevine.github.io',
+    base: '/pure-plant-new',
 });
