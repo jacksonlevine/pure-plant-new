@@ -32,6 +32,7 @@ import MolecularViewer from "../functional-components/MolecularViewer";
 import landing1 from "/videos/landing.mp4";
 import landingmobile from "/videos/landing_mobile.mp4";
 
+const { isTopElement } = Astro.props;
 
 ---
 
@@ -40,7 +41,7 @@ import landingmobile from "/videos/landing_mobile.mp4";
          TODO: Looking into smaller sizes for smaller screens for performance */}
     
 
-    <div class="relative w-screen h-screen max-w-screen lg:px-[12rem] overflow-y-visible">
+    <div class="relative w-screen h-full max-w-screen lg:px-[12rem] overflow-y-visible objec">
 
         <video
                 class="absolute top-0 left-0 w-screen h-full object-cover -z-20 invert-dark"
@@ -77,6 +78,7 @@ import landingmobile from "/videos/landing_mobile.mp4";
             size={{ width: "400px", height: "600px" }}
           />
         </div> */}
+        {isTopElement && (<div class="h-[12rem] lg:h-[6rem]"></div>)}
         <div class="flex w-full h-full flex-col lg:items-center z-50">
             <div class="flex w-full flex-col lg:flex-row justify-center">
                 {/* Half 1*/}

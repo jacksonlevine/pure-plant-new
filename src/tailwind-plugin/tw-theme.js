@@ -143,5 +143,14 @@ module.exports = plugin.withOptions(() => {
               filter: "invert(1)",
           },
       });
+
+      addBase({
+          ".header::before": {
+              backgroundColor: "var(--color-white)", // default
+          },
+          ".dark .header::before": {
+              backgroundColor: "var(--color-black)", // dark mode
+          },
+      });
   };
 });

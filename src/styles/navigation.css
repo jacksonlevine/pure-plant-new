@@ -1,8 +1,22 @@
+.header::before {
+    content: "";
+    @apply absolute left-0 right-0 top-0 h-[125%] backdrop-blur-xs;
+    background-color: whitesmoke;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+    mask-repeat: no-repeat;
+    mask-size: cover;
+    z-index: -1;
+}
+
+
+.dark .header::before {
+    background-color: black;
+}
+
+
 .header {
     @apply py-6;
     background-color: transparent;
-    backdrop-filter: blur(8px);
-
 }
 
 /* navbar items */
