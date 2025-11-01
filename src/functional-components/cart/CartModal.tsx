@@ -78,7 +78,7 @@ const CartModal: React.FC = () => {
                 <FaShoppingCart size={76} />
               </div>
               <p>Oops. Your Bag Is Empty.</p>
-              <a href="/products" className="btn btn-primary w-full">
+              <a href="/pure-plant-new/products" className="btn btn-primary w-full">
                 Go to products
               </a>
             </div>

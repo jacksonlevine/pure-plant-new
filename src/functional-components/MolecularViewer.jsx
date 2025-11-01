@@ -54,7 +54,7 @@ const PointCloudBillboard = () => {
             ]),
         ];
 
-        const dotTexture = new THREE.TextureLoader().load("/images/dot.png");
+        const dotTexture = new THREE.TextureLoader().load("/pure-plant-new/images/dot.png");
         const sprites = [];
         const maxPoints = 50;
 
