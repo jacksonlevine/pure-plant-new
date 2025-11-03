@@ -113,9 +113,11 @@ body h2 {
     @apply dark:text-shadow-xs dark:text-cyan-200
 }
 h3 {
-    color:black
+    color:black;
+    @apply dark:text-gray-400
 }
 body {
     font-family: 'Lato', sans-serif !important;
+    transition: all 0.2s ease-in-out;
 }
 
