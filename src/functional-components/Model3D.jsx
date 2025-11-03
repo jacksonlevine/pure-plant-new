@@ -1,4 +1,6 @@
-﻿import React, { useEffect } from 'react';
+﻿'use client';
+
+import React, { useEffect } from 'react';
 
 let modelViewerLoaded = false;
 
@@ -12,7 +14,7 @@ export default function Model3D({ src, alt, size, className }) {
     }, []);
 
     return (
-        <model-viewer
+        <model-viewer suppressHydrationWarning
             camera-controls
             touch-action="pan-y"
             disable-zoom

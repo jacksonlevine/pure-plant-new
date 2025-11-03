@@ -1,6 +1,6 @@
 ﻿---
-import ProductShowcaseSection from "../functional-components/ProductShowcaseSection.tsx";
-import type ProductShowcaseContent from "../functional-components/ProductShowcaseSection.tsx";
+import ProductShowcaseSection from "../components/ProductShowcaseSection.astro"
+import type ProductShowcaseContent from "../components/ProductShowcaseSection.astro";
 import Layout from "../layouts/Layout.astro";
 
 const cognitiveTransform = {
@@ -51,17 +51,17 @@ const cellularOptimization = {
 import landing2 from "../assets/videos/landing2.mp4";
 ---
 <Layout>
-    <video
-            class="fixed top-0 left-0 w-full h-full object-cover z-[-50]"
-            autoplay
-            muted
-            loop
-            playsinline
-    >
-        <source src={landing2} type="video/mp4" />
-    </video>
-    <ProductShowcaseSection client:load content={cognitiveTransform} />
-    <ProductShowcaseSection client:load content={neurotransmittedPrecision} />
-    <ProductShowcaseSection client:load content={cellularOptimization} />
+    <!--<video-->
+    <!--        class="fixed top-0 left-0 w-full h-full object-cover z-[-50]"-->
+    <!--        autoplay-->
+    <!--        muted-->
+    <!--        loop-->
+    <!--        playsinline-->
+    <!--&gt;-->
+    <!--    <source src={landing2} type="video/mp4" />-->
+    <!--</video>-->
+    <ProductShowcaseSection content={cognitiveTransform} />
+    <ProductShowcaseSection content={neurotransmittedPrecision} />
+    <ProductShowcaseSection content={cellularOptimization} />
 </Layout>
 

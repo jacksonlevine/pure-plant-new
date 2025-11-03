@@ -1,0 +1,245 @@
+﻿---
+const testimonials = [
+    { text: "I had no idea my supplements came from sheep’s wool—absolutely shocking", author: "Sarah M." },
+    { text: "Learning the truth made me switch immediately to plant-based Vitamin D3", author: "Dr. James K." },
+    { text: "The process with lanolin disgusted me—pine tree sourcing feels so much cleaner", author: "Michael R." },
+    { text: "Once I discovered the difference, I could never go back to wool-derived D3", author: "Emily T." },
+    { text: "It’s a relief knowing my Vitamin D3 now comes from a pure, plant source", author: "David L." },
+];
+
+import FadeInOnScroll from "../functional-components/FadeInOnScroll";
+
+import landing2 from '../assets/videos/repeating_for_testing.mp4'
+import landing2mobile from '../assets/videos/repeating_for_testing_mobile.mp4'
+import landing1 from '../assets/videos/landing.mp4'
+import landingmobile from '../assets/videos/landing_mobile.mp4'
+
+import badges from "../assets/images/badge.png"
+
+import Testimonials from "../functional-components/Testimonials";
+
+const {isTopElement} = Astro.props;
+---
+
+
+<div data-vid-background-container class="relative">
+    <div class="absolute top-0 left-0 w-screen h-full flex flex-row -z-20">
+        <video
+                class="w-1/2 h-full object-cover -z-20"
+                autoplay
+                loop
+                muted
+                playsinline
+        >
+            <source src={landingmobile} media="(max-width: 768px)" type="video/mp4" />
+            <source src={landing1} type="video/mp4" />
+        </video>
+        <video
+                class="w-1/2 h-full object-cover -z-20"
+                autoplay
+                loop
+                muted
+                playsinline
+        >
+            <source src={landing2mobile} media="(max-width: 768px)" type="video/mp4" />
+            <source src={landing2} type="video/mp4" />
+        </video>
+    </div>
+
+    {isTopElement && (<div class="h-[14rem] lg:h-[8rem]"></div>)}
+
+    <div class="flex flex-col justify-center items-start xl:px-[12rem] z-0">
+        <h1 class="xl:!text-7xl xl:min-h-fit md:!text-5xl sm:!text-3xl font-bold w-full text-center ">The Disgusting Truth About Your Vitamin D3</h1>
+
+        <div class="xl:max-w-2/3 p-[1rem]  mb-[3rem]">
+            <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">What if we told you that more than 99% of Vitamin D3 supplements
+                come from sheep's grease? That's right - lanolin, the waxy, greasy
+                substance scraped from sheep, is processed into what you
+                think is 'natural' Vitamin D3.</h3>
+
+        </div>
+        <div class="flex flex-row justify-end w-full">
+            <h3 class="text-xl pb-[3rem] animate-fi-2 xl:max-w-2/3 text-shadow-md">PurePlantD3® changes everything. Using our proprietary actinic process,
+                we transform organic pine tree sterols into pure, bioidentical
+                cholecalciferol - exactly how your body makes it naturally.</h3>
+        </div>
+        <div class="xl:max-w-2/3 p-[1rem]  mb-[3rem] text-shadow-md">
+            <h2 class="!text-4xl animate-fi-3">No sheep. No grease. No compromise.</h2>
+        </div>
+        <div class="flex flex-row justify-center w-full mb-[10rem]">
+            <Testimonials client:load testimonials={testimonials} />
+        </div>
+
+        <FadeInOnScroll client:load >
+            {/* Sustainability Impact Section */}
+            <div class="w-full bg-gradient-to-br from-green-900/30 to-emerald-900/30 backdrop-blur-sm pt-[0.05rem] pb-[2rem] rounded-3xl shadow-lg">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="!text-5xl font-bold text-center !text-black/80">Sustainability That Matters</h1>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white/5 p-8 rounded-2xl backdrop-blur-md border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-4 text-red-400">Traditional Lanolin</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-start">
+                                    <span class="mr-3 text-red-400">✗</span>
+                                    <span>Animal farming dependence</span>
+                                </li>
+                                <li class="flex items-start" >
+                                    <span class="mr-3 text-red-400">✗</span>
+                                    <span>High carbon footprint</span>
+                                </li>
+                                <li class="flex items-start" >
+                                    <span class="mr-3 text-red-400">✗</span>
+                                    <span>Chemical-intensive processing</span>
+                                </li>
+                                <li class="flex items-start" >
+                                    <span class="mr-3 text-red-400">✗</span>
+                                    <span>Ethical concerns</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/5 p-8 rounded-2xl backdrop-blur-md border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-4 text-green-400">Plant-Based Sourcing</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-start">
+                                    <span class="mr-3 text-green-400">✓</span>
+                                    <span>Renewable pine tree resources</span>
+                                </li>
+                                <li class="flex items-start" >
+                                    <span class="mr-3 text-green-400">✓</span>
+                                    <span>Zero animal exploitation</span>
+                                </li>
+                                <li class="flex items-start" >
+                                    <span class="mr-3 text-green-400">✓</span>
+                                    <span>Carbon-negative production</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="mr-3 text-green-400">✓</span>
+                                    <span>Sustainable forest management</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </FadeInOnScroll>
+
+        <FadeInOnScroll client:load >
+            {/* Scientific Authority Section */}
+            <div class="w-full mt-24">
+                <div class="w-full text-center">
+                    <h1 class="!text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                        Pharmaceutical-Like Purity From Plants
+                    </h1>
+                </div>
+
+                <div class="max-w-5xl mx-auto text-center">
+
+                    <div class="max-w-3xl mx-auto mt-12 space-y-6 text-xl leading-relaxed">
+                        <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">
+
+                            While others settle for crude extracts and synthetic compounds,
+                            we've achieved something extraordinary: <span class="font-bold text-emerald-400">99.0%+ pure, isolated
+                                        phytochemicals</span> that work exactly as nature intended.
+
+                        </h3>
+                        <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">
+
+                            Our precision biological interventions don't just support your
+                            health - they <span class="font-bold">optimize your biological potential at the cellular level</span>.
+
+                        </h3>
+                    </div>
+
+                    {/* Credibility Elements */}
+                    <div class="mt-16 bg-gradient-to-br from-blue-900/20 to-purple-900/20 backdrop-blur-md p-12 rounded-3xl border border-white/10 shadow-lg">
+                        <h3 class="text-3xl font-semibold mb-8">Independently Verified Excellence</h3>
+                        <div class="flex flex-wrap justify-center items-center gap-8 mb-8">
+                            <div class="bg-white/10 px-8 py-4 rounded-xl backdrop-blur-sm">
+                                <p class="text-sm text-gray-300 mb-1">Accreditation</p>
+                                <p class="text-2xl font-bold">ISO/IEC 17025</p>
+                            </div>
+                            <div class="bg-white/10 px-8 py-4 rounded-xl backdrop-blur-sm">
+                                <p class="text-sm text-gray-300 mb-1">Purity</p>
+                                <p class="text-2xl font-bold">99.0%+</p>
+                            </div>
+                            <div class="bg-white/10 px-8 py-4 rounded-xl backdrop-blur-sm">
+                                <p class="text-sm text-gray-300 mb-1">Testing</p>
+                                <p class="text-2xl font-bold">Third-Party</p>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-6 text-left">
+                            <div class="bg-white/5 p-6 rounded-xl">
+                                <div class="text-4xl mb-3">🔬</div>
+                                <h4 class="font-semibold text-lg mb-2">Laboratory Certified</h4>
+                                <p class="text-gray-300 text-sm">ISO/IEC 17025 accredited third-party testing validates every batch</p>
+                            </div>
+                            <div class="bg-white/5 p-6 rounded-xl">
+                                <div class="text-4xl mb-3">✓</div>
+                                <h4 class="font-semibold text-lg mb-2">Bioidentical Formula</h4>
+                                <p class="text-gray-300 text-sm">Identical molecular structure to the D3 your body produces naturally</p>
+                            </div>
+                            <div class="bg-white/5 p-6 rounded-xl">
+                                <div class="text-4xl mb-3">🌿</div>
+                                <h4 class="font-semibold text-lg mb-2">Plant-Derived</h4>
+                                <p class="text-gray-300 text-sm">Proprietary actinic process from organic pine tree sterols</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <FadeInOnScroll client:load >
+                    <div class="flex flex-row justify-center items-center mt-[6rem] drop-shadow-lg">
+                        <img src={badges.src} class="z-50 w-full max-w-4xl my-0" />
+                    </div>
+                </FadeInOnScroll>
+
+            </div>
+        </FadeInOnScroll>
+
+        {/* Manufacturing Transparency Section */}
+        <FadeInOnScroll client:load >
+            <div class="w-full my-[6rem]">
+                <div class="w-full text-center">
+                    <h1 class="!text-7xl font-bold mb-4">See Where It's Made</h1>
+                    <h2 class="text-xl text-gray-300">
+                        We don't hide behind marketing buzzwords. Watch our proprietary actinic process in action.
+                    </h2>
+                </div>
+
+                <div class="max-w-6xl mx-auto">
+
+
+
+                    <div class="relative bg-black/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 group hover:border-emerald-400/50 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative p-16 flex flex-col md:flex-row items-center gap-12">
+                            <div class="flex-1 space-y-6">
+                                <div class="inline-block px-4 py-2 bg-emerald-500/20 rounded-full text-emerald-300 text-sm font-semibold">
+                                    FULL TRANSPARENCY
+                                </div>
+                                <h3 class="text-3xl font-bold">Walk through our facility from anywhere</h3>
+                                <p class="text-lg text-gray-300 leading-relaxed">
+                                    From raw pine sterols to bottled D3, every step documented. No proprietary secrets
+                                    that compromise quality. Just clean science you can verify yourself.
+                                </p>
+                                <button class="mt-6 px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/50">
+                                    Take the Virtual Tour →
+                                </button>
+                            </div>
+                            <div class="flex-1">
+                                <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex items-center justify-center border border-white/10">
+                                    <div class="text-center">
+                                        <div class="text-6xl mb-4 opacity-50">🏭</div>
+                                        <p class="text-gray-500 text-sm">Virtual facility preview</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </FadeInOnScroll>
+
+    </div>
+</div>
