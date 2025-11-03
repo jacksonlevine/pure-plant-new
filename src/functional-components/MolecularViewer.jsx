@@ -2,7 +2,9 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-// ===== GLOBAL SINGLETONS =====
+//This uses a shared renderer state right now to never have to tear down or rebuild a context,
+//will possibly rethink this later
+
 let sharedRenderer;
 let sharedScene;
 let sharedCamera;
@@ -11,6 +13,7 @@ let sharedSprites = [];
 let animationFrameId;
 let cycleInterval;
 let resizeObserver;
+
 
 const POSITION_SETS = [
     [
@@ -38,7 +41,6 @@ const POSITION_SETS = [
 
 const maxPoints = 50;
 
-// ===== ANIMATION STATE =====
 let currentSet = 0;
 let progress = 0;
 let animating = false;
@@ -86,7 +88,6 @@ const PointCloudBillboard = () => {
     useEffect(() => {
         if (!mountRef.current) return;
 
-        // ===== INIT SHARED RENDERER =====
         if (!sharedRenderer) {
             sharedScene = new THREE.Scene();
             sharedCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
@@ -150,10 +151,11 @@ const PointCloudBillboard = () => {
         resizeObserver.observe(mountRef.current);
         resize();
 
-        // ===== CLEANUP =====
         return () => {
-            if (mountRef.current.contains(sharedRenderer.domElement)) {
-                mountRef.current.removeChild(sharedRenderer.domElement);
+            if(mountRef.current) {
+                if (mountRef.current.contains(sharedRenderer.domElement)) {
+                    mountRef.current.removeChild(sharedRenderer.domElement);
+                }
             }
             resizeObserver.disconnect();
         };
