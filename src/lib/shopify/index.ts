@@ -162,7 +162,7 @@ const reshapeCollection = (
 
   return {
     ...collection,
-    path: `/products/${collection.handle}`,
+    path: `/pure-plant-new/products/${collection.handle}`,
   };
 };
 

@@ -3,6 +3,8 @@ import FadeInOnScroll from "./FadeInOnScroll";
 import Model3D from "./Model3D.jsx";
 import CTAButton from "./CTAButton";
 
+import ph32 from "../assets/images/ph32.png"
+
 export interface ProductShowcaseContent {
     title: string;
     description: string;
@@ -29,7 +31,7 @@ export default function ProductShowcaseSection({
                 {/* Top Row: Title + Description */}
                 <div className={`flex flex-col ${layoutOrder} justify-center items-center mx-[10%]`}>
                     <div className="w-full flex flex-col px-[2rem]">
-                        <h1 className="xl:!text-7xl lg:!text-4xl">{title}</h1>
+                        <h1 className="xl:!text-7xl lg:!text-4xl"><a href={productLink}>{title}</a></h1>
                     </div>
 
                     <div className="w-full flex flex-col py-[6rem]">
@@ -45,8 +47,8 @@ export default function ProductShowcaseSection({
                         <Model3D
                             src={modelSrc}
                             alt={`${title} bottle`}
-                            size={{ width: "100%", height: "500px" }}
-                            className="origin-center md:scale-250"
+                            size={{ width: "100%", height: "48rem" }}
+                            className="origin-center"
                         />
                     )}
 
@@ -56,7 +58,7 @@ export default function ProductShowcaseSection({
                                 key={index}
                                 className="flex flex-col w-full px-[1rem] hover:scale-102 transition-all duration-400ms"
                             >
-                                <img className="w-full" src="/images/ph32.png" alt="" />
+                                <img className="w-full" src={ph32.src} alt="" />
                                 <h3>{benefit}</h3>
                             </div>
                         ))}
@@ -64,11 +66,10 @@ export default function ProductShowcaseSection({
                 </div>
             </FadeInOnScroll>
 
-            <FadeInOnScroll>
-                <div className="flex flex-col items-center" />
-            </FadeInOnScroll>
 
+            <div className="py-[3rem]" /> 
             <CTAButton label="Continue to product" href={productLink} />
+            <div className="py-[5rem]" />
         </div>
     );
 }

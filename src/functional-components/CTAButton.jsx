@@ -3,7 +3,7 @@
 export default function CTAButton( {label, href} ) {
     return (
         <div className="flex flex-row justify-center items-center z-20 animate-fi px-10">
-            <a href={href} className="px-8 py-4 text-xl font-semibold flex flex-row justify-center items-center w-full h-full sm:min-w-sm 
+            <a href={href} className="px-8 py-4 text-xl font-semibold flex flex-row justify-center items-center w-fit h-full sm:min-w-sm 
     bg-white/70 backdrop-blur-md border 
     border-white/30 rounded-full 
     text-black transition-all duration-300 

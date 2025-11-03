@@ -40,7 +40,7 @@ function SubmitButton({
   if (!selectedVariantId) {
     return (
       <DynamicTag
-        href={`/products/${handle}`}
+        href={`/pure-plant-new/products/${handle}`}
         aria-label="Please select an option"
         aria-disabled
         className={`${buttonClasses} ${DynamicTag === "button" ? disabledClasses : ""}`}

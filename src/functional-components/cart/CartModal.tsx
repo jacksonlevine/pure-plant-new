@@ -128,7 +128,7 @@ const CartModal: React.FC = () => {
                 );
 
                 const merchandiseUrl = createUrl(
-                  `/products/${item.merchandise.product.handle}`,
+                  `/pure-plant-new/products/${item.merchandise.product.handle}`,
                   new URLSearchParams(merchandiseSearchParams)
                 );
 

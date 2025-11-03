@@ -13,7 +13,7 @@ const cognitiveTransform = {
         "Focus intensity that transforms productivity",
         "Cognitive performance that sets you apart",
     ],
-    productLink: "/products/neurozine",
+    productLink: "/pure-plant-new/products/neurozine",
     modelSrc: "/pure-plant-new/models/bottleexample.glb?v=1",
     reverse: false,
 };
@@ -28,7 +28,7 @@ const neurotransmittedPrecision = {
         "Appetite regulation that supports healthy weight",
         "Emotional stability that enhances relationships",
     ],
-    productLink: "/products/serophan",
+    productLink: "/pure-plant-new/products/serophan",
     modelSrc: "/pure-plant-new/models/bottleexample.glb?v=1",
     reverse: true,
 };
@@ -43,14 +43,23 @@ const cellularOptimization = {
         "Muscle strength that improves with age",
         "Cardiovascular health that energizes life",
     ],
-    productLink: "/products/pureplantd3",
+    productLink: "/pure-plant-new/products/pureplantd3",
     modelSrc: "/pure-plant-new/models/bottleexample.glb?v=1",
     reverse: false,
 };
 
-
+import landing2 from "../assets/videos/landing2.mp4";
 ---
 <Layout>
+    <video
+            class="fixed top-0 left-0 w-full h-full object-cover z-[-50]"
+            autoplay
+            muted
+            loop
+            playsinline
+    >
+        <source src={landing2} type="video/mp4" />
+    </video>
     <ProductShowcaseSection client:load content={cognitiveTransform} />
     <ProductShowcaseSection client:load content={neurotransmittedPrecision} />
     <ProductShowcaseSection client:load content={cellularOptimization} />

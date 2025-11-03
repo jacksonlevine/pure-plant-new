@@ -101,7 +101,7 @@ model-viewer {
 }
 
 body h1 {
-    z-index:50;
+    z-index:20;
     color:rgb(7,94,166);
     @apply dark:text-white;
 }
