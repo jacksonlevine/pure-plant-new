@@ -27,10 +27,8 @@ jobs:
           # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
           # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
         env:
-          SESSION_SECRET: 'foobar'
-          PUBLIC_STORE_DOMAIN: 'pure-plant-test-site.myshopify.com'
-          PRIVATE_STOREFRONT_API_TOKEN: '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'
-          PUBLIC_STOREFRONT_API_TOKEN: '2631316ec45e01c3038d5a24e9f1978a'
+          PUBLIC_STORE_DOMAIN: pureplantdev.myshopify.com
+          PUBLIC_STOREFRONT_API_TOKEN: 6b1998ad993e5edbe678ae7d446f66e7
   deploy:
     needs: build
     runs-on: ubuntu-latest
