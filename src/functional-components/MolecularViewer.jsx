@@ -148,7 +148,6 @@ const PointCloudBillboard = () => {
             camDist.current = 1.5;
             sharedControls.maxDistance = camDist.current;
             sharedControls.minDistance = camDist.current;
-            console.log("Reisze claled");
             //sharedRenderer.setPixelRatio(window.devicePixelRatio * 2.5);  
         };
 
