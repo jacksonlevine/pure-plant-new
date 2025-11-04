@@ -84,7 +84,7 @@ const { isTopElement } = Astro.props;
         <div class="flex w-full h-full flex-col lg:items-center z-50">
             <div class="flex w-full flex-col lg:flex-row justify-center">
                 {/* Half 1*/}
-                <div class="flex w-full justify-start lg:justify-start lg:min-h-[66.6667vh]">
+                <div class="flex w-full justify-start lg:justify-start lg:min-h-[50vh]">
                     <div class="absolute inset-0
                         backdrop-blur-xs
                         bg-white/30
@@ -112,7 +112,7 @@ const { isTopElement } = Astro.props;
                         <div class="z-[0] flex flex-col justify-start px-4 animate-fi">
                             <div class="flex object-contain w-full">
                                 <h1
-                                        class="!text-4xl xl:!text-7xl lg:min-h-fit md:!text-5xl font-bold animate-float h-fit w-full">
+                                        class="!text-5xl xl:!text-7xl lg:min-h-fit md:!text-5xl font-bold animate-float h-fit w-full">
                                     {selectedContent.hook}
                                 </h1>
                             </div>
@@ -135,7 +135,7 @@ const { isTopElement } = Astro.props;
 
                 {/* End of Half 1 */}
                 {/* Half 2 */}
-                <div class="flex w-full min-h-[66.6667vh] min-w-[10px] lg:block overflow-visible z-10 transition-all duration-200 hover:scale-105">
+                <div class="flex w-full  min-w-[6rem] lg:block overflow-visible z-10 transition-all duration-200 hover:scale-105">
                     <MolecularViewer client:load/>
                 </div>
 

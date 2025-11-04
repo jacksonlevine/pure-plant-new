@@ -16,7 +16,7 @@ const {TopElement } = Astro.props;
 		<title>Pure Plant 2.0</title>
         <ClientRouter/>
 	</head>
-	<body>
+	<body class="overflow-x-clip">
         <div>
             {TopElement && <div class="absolute left-0 top-0">
                 <TopElement class="pt-6" isTopElement={true}/>
@@ -24,7 +24,7 @@ const {TopElement } = Astro.props;
             
             <Header />
         </div>
-        {TopElement && <div class="h-[100vh]"></div>}
+        {TopElement && <div class="h-[80vh]"></div>}
         
 		<slot />
 	</body>

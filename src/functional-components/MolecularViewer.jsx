@@ -84,6 +84,7 @@ const animate = () => {
 
 const PointCloudBillboard = () => {
     const mountRef = useRef(null);
+    const camDist = useRef(3.5);
 
     useEffect(() => {
         if (!mountRef.current) return;
@@ -99,8 +100,8 @@ const PointCloudBillboard = () => {
             sharedControls = new OrbitControls(sharedCamera, sharedRenderer.domElement);
             sharedControls.enableDamping = true;
             sharedControls.dampingFactor = 0.05;
-            sharedControls.maxDistance = 3.5;
-            sharedControls.minDistance = 3.5;
+            sharedControls.maxDistance = camDist.current;
+            sharedControls.minDistance = camDist.current;
             sharedControls.enableZoom = false;
             sharedControls.enablePan = false;
 
@@ -144,12 +145,16 @@ const PointCloudBillboard = () => {
             sharedCamera.aspect = clientWidth / clientHeight;
             sharedCamera.updateProjectionMatrix();
             sharedRenderer.setSize(clientWidth, clientHeight);
-            sharedRenderer.setPixelRatio(window.devicePixelRatio * 2); 
+            camDist.current = 1.5;
+            sharedControls.maxDistance = camDist.current;
+            sharedControls.minDistance = camDist.current;
+            console.log("Reisze claled");
+            //sharedRenderer.setPixelRatio(window.devicePixelRatio * 2.5);  
         };
 
         resizeObserver = new ResizeObserver(resize);
         resizeObserver.observe(mountRef.current);
-        resize();
+        requestAnimationFrame(resize)
 
         return () => {
             if(mountRef.current) {
@@ -169,8 +174,8 @@ const PointCloudBillboard = () => {
                 top: 0,
                 left: 0,
                 width: "100%",
-                height: "100%",
-                transform: "scale(2)",
+                height: "50vw",
+                maxHeight: "50vh",
                 transformOrigin: "center center",
                 pointerEvents: "all",
                 zIndex: 50,
