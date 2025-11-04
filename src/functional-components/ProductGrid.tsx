@@ -1,4 +1,5 @@
 ﻿
+import config from "@/CONFIG/config.json";
 import { defaultSort, sorting } from "@/lib/constants";
 import type { PageInfo, Product } from "@/lib/shopify/types";
 import React, { useEffect, useRef, useState } from "react";
@@ -18,7 +19,7 @@ const ProductGrid = ({
     reverse: boolean;
     searchValue: string | null;
 }) => {
-    const  currencySymbol  = '$';
+    const { currencySymbol } = config.shopify;
     const [products, setProducts] = useState(initialProducts);
     const [pageInfo, setPageInfo] = useState(initialPageInfo);
     const [loading, setLoading] = useState(false);
