@@ -1,4 +1,5 @@
 ﻿---
+import Video from "./Video.astro";
 const testimonials = [
     { text: "I had no idea my supplements came from sheep’s wool—absolutely shocking", author: "Sarah M." },
     { text: "Learning the truth made me switch immediately to plant-based Vitamin D3", author: "Dr. James K." },
@@ -24,26 +25,14 @@ const {isTopElement} = Astro.props;
 
 <div data-vid-background-container class="relative">
     <div class="absolute top-0 left-0 w-screen h-full flex flex-row -z-20">
-        <video
+        <Video
                 class="w-1/2 h-full object-cover -z-20"
-                autoplay
-                loop
-                muted
-                playsinline
-        >
-            <source src={landingmobile} media="(max-width: 768px)" type="video/mp4" />
-            <source src={landing1} type="video/mp4" />
-        </video>
-        <video
+                src="/pure-plant-new/videos/landing.mp4"
+        />
+        <Video
                 class="w-1/2 h-full object-cover -z-20"
-                autoplay
-                loop
-                muted
-                playsinline
-        >
-            <source src={landing2mobile} media="(max-width: 768px)" type="video/mp4" />
-            <source src={landing2} type="video/mp4" />
-        </video>
+                src="/pure-plant-new/videos/landing2.mp4"
+        />
     </div>
 
     {isTopElement && (<div class="h-[14rem] lg:h-[8rem]"></div>)}

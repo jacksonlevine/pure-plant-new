@@ -1,0 +1,50 @@
+﻿---
+import path from "path";
+import vidoptconfig from "../CONFIG/videoOptimizer.json";
+
+const { src, class: className = '' } = Astro.props;
+const { sizes } = vidoptconfig;
+const baseName = path.basename(src, '.mp4');
+---
+
+    <video
+            id={`vid-${baseName}`}
+            class={className}
+            preload="auto"
+            poster={`/pure-plant-new/videos/${baseName}-poster.jpg`}
+            muted
+            playsinline
+            autoplay
+            loop
+    ></video>
+
+    <script type="module" define:vars={{ sizes, baseName }}>
+        
+
+        function pickSource() {
+            let chosen = sizes[0];
+            for (const size of sizes) {
+                if (size.media && window.matchMedia(size.media).matches) {
+                    chosen = size;
+                }
+            }
+            return `/pure-plant-new/videos/${baseName}-${chosen.label}.mp4`;
+        }
+
+        function updateVideo() {
+            const video = document.getElementById(`vid-${baseName}`);
+            
+            const newSrc = pickSource();
+            if (video.src !== newSrc) {
+                const wasPlaying = !video.paused && !video.ended;
+                video.pause();
+                video.src = newSrc;
+                video.load();
+                if (wasPlaying) video.play().catch(() => {});
+            }
+        }
+
+        document.addEventListener("astro:page-load", () => {
+            updateVideo();
+        });
+    </script>

@@ -1,0 +1,12 @@
+﻿{
+  "sizes": [
+    { "width": 64, "height": 36, "label": "36p", "media": null },
+    { "width": 128, "height": 72, "label": "72p", "media": null },
+    { "width": 256, "height": 144, "label": "144p", "media": null },
+    { "width": 426, "height": 240, "label": "240p", "media": "(max-width: 480px)" },
+    { "width": 640, "height": 360, "label": "360p", "media": "(max-width: 768px)" },
+    { "width": 854, "height": 480, "label": "480p", "media": "(max-width: 1024px)" },
+    { "width": 1280, "height": 720, "label": "720p", "media": "(max-width: 1440px)" },
+    { "width": 1920, "height": 1080, "label": "1080p", "media": "(min-width: 1441px)" }
+  ]
+}
