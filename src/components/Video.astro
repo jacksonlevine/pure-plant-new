@@ -33,6 +33,7 @@ const baseName = path.basename(src, '.mp4');
 
         function updateVideo() {
             const video = document.getElementById(`vid-${baseName}`);
+            if (!video) return;
             
             const newSrc = pickSource();
             if (video.src !== newSrc) {
@@ -43,8 +44,9 @@ const baseName = path.basename(src, '.mp4');
                 if (wasPlaying) video.play().catch(() => {});
             }
         }
-
-        document.addEventListener("astro:page-load", () => {
-            updateVideo();
-        });
+        const video = document.getElementById(`vid-${baseName}`);
+        if (video) {
+            updateVideo(); // Run immediately
+            document.addEventListener("astro:page-load", updateVideo);
+        }
     </script>
