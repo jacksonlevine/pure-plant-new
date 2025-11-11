@@ -101,13 +101,13 @@ model-viewer {
 }
 
 body h1 {
-    z-index:20;
+    z-index:30 !important;
     color:rgb(7,94,166);
     @apply dark:text-white;
 }
 
 body h2 {
-    z-index:50;
+    z-index:30 !important;
     color: rgb(20, 95, 122);
     text-shadow: 0px 0px 4px #FFFFFF;
     @apply dark:text-shadow-xs dark:text-cyan-200

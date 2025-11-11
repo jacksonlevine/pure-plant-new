@@ -7,6 +7,11 @@ import videoOptimizer from './integrations/videoOptimizer.js';
 import {fileURLToPath} from "url";
 // https://astro.build/config
 export default defineConfig({
+
+    prefetch: {
+        prefetchAll: true
+    },
+    
   vite: {
       plugins: [tailwindcss()],
       resolve: {

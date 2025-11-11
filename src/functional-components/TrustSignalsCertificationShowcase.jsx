@@ -55,7 +55,7 @@ export default function TrustSignalsCertificationShowcase() {
         <div className="flex flex-col-reverse xl:flex-row justify-center items-center w-full px-[5%] gap-8 min-h-[22rem] xl:h-[12rem] my-[4rem]">
             {/* Badge Wall */}
             <div className="xl:w-1/2 flex flex-col gap-4 ">
-                <div className="xl:max-w-[70%]  mx-auto">
+                <div className="xl:max-w-fit  mx-auto">
                     
                 
                     <div className="flex flex-row mr-[10%]">
@@ -64,7 +64,7 @@ export default function TrustSignalsCertificationShowcase() {
                                 key={i}
                                 src={url}
                                 alt={`badge ${i}`}
-                                className={`w-full min-h-[7rem] object-contain transition-all duration-300ms cursor-pointer ${
+                                className={`w-full m-[1rem] min-h-[7rem] object-contain transition-all duration-300ms cursor-pointer ${
                                     activeBadge === i ? "scale-100" : "scale-90"
                                 }`}
                                 onMouseEnter={() => handleBadgeHover(i)}
@@ -78,7 +78,7 @@ export default function TrustSignalsCertificationShowcase() {
                                 key={i + 3}
                                 src={url}
                                 alt={`badge ${i + 3}`}
-                                className={`w-full min-h-[7rem] object-contain transition-all duration-300ms cursor-pointer ${
+                                className={`w-full m-[1rem] min-h-[7rem] object-contain transition-all duration-300ms cursor-pointer ${
                                     activeBadge === i + 3 ? "scale-100" : "scale-90"
                                 }`}
                                 onMouseEnter={() => handleBadgeHover(i + 3)}

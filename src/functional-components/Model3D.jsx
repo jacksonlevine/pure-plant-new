@@ -6,12 +6,12 @@ let modelViewerLoaded = false;
 
 export default function Model3D({ src, alt, size, className }) {
 
-    useEffect(() => {
-        if (!modelViewerLoaded) {
-            import('@google/model-viewer/dist/model-viewer');
-            modelViewerLoaded = true;
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!modelViewerLoaded) {
+    //         import('@google/model-viewer/dist/model-viewer');
+    //         modelViewerLoaded = true;
+    //     }
+    // }, []);
 
     return (
         <model-viewer suppressHydrationWarning

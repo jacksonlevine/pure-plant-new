@@ -76,9 +76,7 @@ const { isTopElement } = Astro.props;
         {isTopElement && (<div class="h-[12rem] lg:h-[8rem]"></div>)}
         <div class="flex w-full h-full flex-col lg:items-center z-50">
             <div class="flex w-full flex-col lg:flex-row justify-center">
-                {/* Half 1*/}
-                <div class="flex w-full justify-start lg:justify-start lg:min-h-[50vh]">
-                    <div class="absolute inset-0
+                <div class="absolute inset-0
                         backdrop-blur-xs
                         bg-white/30
                         dark:bg-black/50
@@ -89,7 +87,11 @@ const { isTopElement } = Astro.props;
                           mask-x-from-80% mask-x-to-100%
                            
                           ">
-                    </div>
+                </div>
+                <MolecularViewer client:only="react"/>
+                {/* Half 1*/}
+                <div class="flex w-full justify-start lg:justify-start lg:min-h-[50vh]">
+                    
                     <div class="relative flex flex-col justify-around lg:items-center  h-full text-white">
                         {/*        <div class="absolute inset-0*/}
                         {/*backdrop-blur-xs*/}
@@ -105,15 +107,15 @@ const { isTopElement } = Astro.props;
                         <div class="z-[0] flex flex-col justify-start px-4 animate-fi">
                             <div class="flex object-contain w-full">
                                 <h1
-                                        class="!text-5xl xl:!text-7xl lg:min-h-fit md:!text-5xl font-bold animate-float h-fit w-full">
+                                        class="z-50 !text-5xl xl:!text-7xl lg:min-h-fit md:!text-5xl font-bold animate-float h-fit w-full py-[3rem]">
                                     {selectedContent.hook}
                                 </h1>
                             </div>
 
-                            <h2 class="text-3xl font-semibold">
+                            <h2 class=" z-50 text-3xl font-semibold">
                                 {selectedContent.headline}
                             </h2>
-                            <h2 class="text-2xl !font-extralight leading-tight ">
+                            <h2 class="z-50 text-2xl !font-extralight leading-tight ">
                                 {selectedContent.subheadline}
                             </h2>
                             <h2 class="text-3xl font-semibold">
@@ -128,8 +130,8 @@ const { isTopElement } = Astro.props;
 
                 {/* End of Half 1 */}
                 {/* Half 2 */}
-                <div class="flex w-full  min-w-[6rem] lg:block overflow-visible z-10 transition-all duration-200 hover:scale-105">
-                    <MolecularViewer client:only="react"/>
+                <div class="flex w-full  min-w-[6rem] lg:block overflow-visible z-10 transition-all duration-200 pointer-events-none">
+                    
                 </div>
 
                 {/* End of half 2 */}
