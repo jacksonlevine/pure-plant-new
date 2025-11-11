@@ -2,11 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import PrimaryHeroSection from "../components/PrimaryHeroSection.astro";
 import VitaminD3TruthRevelation from "../components/VitaminD3TruthRevelation.astro";
-
+import TrustSignalsCertificationShowcase from "../functional-components/TrustSignalsCertificationShowcase"
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 
 ---
 
-<Layout TopElement={PrimaryHeroSection}>
+<Layout>
+    <PrimaryHeroSection isTopElement={true}/>
+    <TrustSignalsCertificationShowcase client:load/>
 </Layout>

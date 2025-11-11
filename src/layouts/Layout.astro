@@ -17,14 +17,10 @@ const {TopElement } = Astro.props;
         <ClientRouter/>
 	</head>
 	<body class="overflow-x-clip">
-        <div>
-            {TopElement && <div class="absolute left-0 top-0">
-                <TopElement class="pt-6" isTopElement={true}/>
-            </div>}
-            
+        <div class="absolute left-0 top-0 w-full">
+
             <Header />
         </div>
-        {TopElement && <div class="h-[80vh]"></div>}
         
 		<slot />
 	</body>

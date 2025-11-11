@@ -37,7 +37,7 @@ const { isTopElement } = Astro.props;
 
 ---
 
-<div data-vid-background-container class="h-full max-w-screen -z-10">
+<div data-vid-background-container class="h-full max-w-screen -z-10 bottomfade">
     {/* Using a video html element for background for now.
          TODO: Looking into smaller sizes for smaller screens for performance */}
     
@@ -48,6 +48,8 @@ const { isTopElement } = Astro.props;
                 class="absolute top-0 left-0 w-screen h-full object-cover -z-20 invert-dark"
                 src="/pure-plant-new/videos/landing.mp4"
         />
+        
+        
         {/* Heres a brief experiment I tried with displaying 3d assets, 
         (From implementation bible: Premium glass packaging (amber glass for PurePlantD3®, flint glass for Serophan® and Neurozine®) with elegant lighting). 
         Works, but will depend on quality assets to look good*/}
@@ -71,7 +73,7 @@ const { isTopElement } = Astro.props;
             size={{ width: "400px", height: "600px" }}
           />
         </div> */}
-        {isTopElement && (<div class="h-[12rem] lg:h-[6rem]"></div>)}
+        {isTopElement && (<div class="h-[12rem] lg:h-[8rem]"></div>)}
         <div class="flex w-full h-full flex-col lg:items-center z-50">
             <div class="flex w-full flex-col lg:flex-row justify-center">
                 {/* Half 1*/}

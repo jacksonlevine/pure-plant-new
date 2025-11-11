@@ -4,10 +4,16 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import videoOptimizer from './integrations/videoOptimizer.js';
+import {fileURLToPath} from "url";
 // https://astro.build/config
 export default defineConfig({
   vite: {
       plugins: [tailwindcss()],
+      resolve: {
+          alias: {
+              three: fileURLToPath(new URL('./node_modules/three', import.meta.url)),
+          },
+      }
   },
 
   integrations: [react(), mdx(), videoOptimizer()], 

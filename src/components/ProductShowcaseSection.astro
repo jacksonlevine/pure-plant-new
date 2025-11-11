@@ -10,9 +10,10 @@ export interface ProductShowcaseContent {
 }
 interface Props {
     content: ProductShowcaseContent;
+    isTopElement?: boolean;
 }
 
-const { content } = Astro.props;
+const { content, isTopElement } = Astro.props;
 
 import FadeInOnScroll from "../functional-components/FadeInOnScroll";
 import CTAButton from "./CTAButton.astro";
@@ -25,11 +26,12 @@ import ph32 from "../assets/images/ph32.png";
 
 
 <div>
+    {isTopElement && (<div class="h-[12rem] lg:h-[6rem]"></div>)}
     <FadeInOnScroll client:load>
         {/* Top Row: Title + Description */}
         <div class={`flex flex-col ${layoutOrder} justify-center items-center mx-[10%]`}>
             <div class="w-full flex flex-col px-[2rem]">
-                <h1 class="xl:!text-7xl lg:!text-4xl"><a href={content.productLink}>{content.title}</a></h1>
+                <h1 class="xl:!text-5xl lg:!text-4xl"><a href={content.productLink}>{content.title}</a></h1>
             </div>
 
             <div class="w-full flex flex-col py-[6rem]">

@@ -112,12 +112,19 @@ body h2 {
     text-shadow: 0px 0px 4px #FFFFFF;
     @apply dark:text-shadow-xs dark:text-cyan-200
 }
-h3 {
+h3, li {
     color:black;
-    @apply dark:text-gray-400
+    @apply dark:text-gray-400 text-xl
 }
 body {
     font-family: 'Lato', sans-serif !important;
     transition: all 0.2s ease-in-out;
 }
 
+.bottomfade {
+
+    /* Standard mask-image for other browsers */
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
+    mask-repeat: no-repeat;
+    mask-size: cover;
+}
