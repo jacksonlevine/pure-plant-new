@@ -166,8 +166,10 @@ export default function PointCloudBillboard() {
             clearInterval(interval);
             cancelAnimationFrame(animationFrameId);
             resizeObserver.disconnect();
-
-            mountRef.current.removeEventListener("mousedown", onMouseDown);
+            if(mountRef.current) {
+                mountRef.current.removeEventListener("mousedown", onMouseDown);
+            }
+            
             window.removeEventListener("mouseup", onMouseUp);
             window.removeEventListener("mousemove", onMouseMove);
         };
