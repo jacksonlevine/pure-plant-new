@@ -3,50 +3,13 @@ import ProductShowcaseSection from "../components/ProductShowcaseSection.astro"
 import type ProductShowcaseContent from "../components/ProductShowcaseSection.astro";
 import Layout from "../layouts/Layout.astro";
 
-const cognitiveTransform = {
-    title: "Unlock Your Cognitive Potential",
-    description:
-        "This isn't just cognitive support—it's your key to unlocking a state of peak mental performance. Neurozine® is engineered for the high-achiever seeking the laser focus, rapid recall, and profound mental clarity required to gain a competitive edge in work and in life.",
-    benefits: [
-        "Mental clarity that cuts through brain fog",
-        "Memory enhancement that surprises you",
-        "Focus intensity that transforms productivity",
-        "Cognitive performance that sets you apart",
-    ],
-    productLink: "/pure-plant-new/products/neurozine",
-    modelSrc: "/pure-plant-new/models/bottleexample.glb?v=1",
-    reverse: false,
-};
+import staticProductInfo from "../assets/json/staticproductinfo.json";
 
-const neurotransmittedPrecision = {
-    title: "Precision Neurotransmitter Synthesis",
-    description:
-        "Don't disrupt your biology—support it. Serophan® provides the pure, essential building block your body uses to naturally create serotonin. The result is balanced mood, restful sleep, and a state of calm well-being, without the side effects or complexities of pharmaceutical interventions.†",
-    benefits: [
-        "Natural mood balance without pharmaceutical disruption",
-        "Sleep quality that transforms your recovery",
-        "Appetite regulation that supports healthy weight",
-        "Emotional stability that enhances relationships",
-    ],
-    productLink: "/pure-plant-new/products/serophan",
-    modelSrc: "/pure-plant-new/models/bottleexample.glb?v=1",
-    reverse: true,
-};
+const cognitiveTransform = staticProductInfo.neurozine;
 
-const cellularOptimization = {
-    title: "Cellular Genomic Optimization",
-    description:
-        "Your body runs on Vitamin D. That's why we perfected it. Pure, pine-derived, and bioidentical to the D3 your body makes from the sun, PurePlantD3® delivers foundational support for robust immunity, strong bones, and a positive mood. All without a trace of sheep's grease.",
-    benefits: [
-        "Bone strength that lasts a lifetime",
-        "Immune function that protects and enhances",
-        "Muscle strength that improves with age",
-        "Cardiovascular health that energizes life",
-    ],
-    productLink: "/pure-plant-new/products/pureplantd3",
-    modelSrc: "/pure-plant-new/models/bottleexample.glb?v=1",
-    reverse: false,
-};
+const neurotransmittedPrecision = staticProductInfo.serophan;
+
+const cellularOptimization = staticProductInfo.pureplantd3;
 
 import landing2 from "../assets/videos/landing2.mp4";
 ---

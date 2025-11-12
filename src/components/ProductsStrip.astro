@@ -1,0 +1,20 @@
+﻿---
+
+import FPProduct from "./FPProduct.astro";
+
+import staticProductInfo from "../assets/json/staticproductinfo.json";
+
+const neurozine = staticProductInfo.neurozine;
+
+const serophan = staticProductInfo.serophan;
+
+const pureplantd3 = staticProductInfo.pureplantd3;
+
+---
+
+
+<div class="w-full flex flex-col lg:flex-row items-center justify-evenly lg:px-[4rem]">
+    <FPProduct benefits={neurozine.benefits} name="Neurozine" href="/pure-plant-new/products/neurozine"/>
+    <FPProduct benefits={pureplantd3.benefits} name="PurePlantD3" href="/pure-plant-new/products/pureplantd3"/>
+    <FPProduct benefits={serophan.benefits} name="Serophan" href="/pure-plant-new/products/serophan"/>
+</div>

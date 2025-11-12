@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import PrimaryHeroSection from "../components/PrimaryHeroSection.astro";
 import VitaminD3TruthRevelation from "../components/VitaminD3TruthRevelation.astro";
 import TrustSignalsCertificationShowcase from "../functional-components/TrustSignalsCertificationShowcase"
+import ProductsStrip from "../components/ProductsStrip.astro";
+import CTAButton from "../components/CTAButton.astro";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 
@@ -10,5 +12,10 @@ import TrustSignalsCertificationShowcase from "../functional-components/TrustSig
 
 <Layout>
     <PrimaryHeroSection isTopElement={true}/>
+    <ProductsStrip />
     <TrustSignalsCertificationShowcase client:load/>
+    <div class="w-full text-center">
+        <h3>Our premium bottles are made from sustainable recycled glass.</h3>
+        <CTAButton label="Learn more about our sustainable impact." href="/pure-plant-new/vitamind3truth"/>
+    </div>
 </Layout>

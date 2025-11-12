@@ -1,0 +1,43 @@
+﻿---
+import suppimg from "../assets/images/supplementmock.jpg"
+const {name, benefits, href } = Astro.props;
+---
+
+<style>
+    .fpproduct:hover {
+        @apply scale-105;
+    }
+    .fpproduct:hover img.prodpic {
+        @apply -translate-x-[3rem]
+    }
+    .fpproduct img.leafpic {
+        opacity: 0;
+        @apply scale-10;
+    }
+    .fpproduct:hover img.leafpic {
+        opacity: 1;
+        @apply scale-100;
+    }
+</style>
+
+<div class="flex flex-col-reverse lg:flex-col items-center justify-evenly fpproduct transition-all ease-in-out max-w-[25vw]">
+    <div class="flex flex-col justify-center items-center ">
+        <a href={href} class="w-[26rem]">
+            <img class="prodpic transition-all w-full h-auto" src={suppimg.src} />
+
+            <img class="m-0 p-0 absolute left-1/2 top-0 leafpic transition-all duration-200 w-[10rem]" src="/pure-plant-new/images/dot.png" />
+
+        </a>
+        <ul class="bfits mb-[2rem]" style="list-style-type:circle;">
+            {
+                benefits.map((benefit)=> (
+                        <li>{benefit}</li>
+                ))
+            }
+        </ul>
+    </div>
+        
+    
+    <h2>{name}</h2>
+</div>
+

@@ -2,7 +2,10 @@
 import { promisify } from 'util';
 import { glob } from 'glob';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
+import crypto from 'crypto';
+
 
 const execAsync = promisify(exec);
 
@@ -12,9 +15,28 @@ import config from '../src/CONFIG/videoOptimizer.json'
 
 const { sizes } = config;
 
+function getFileHash(path) {
+    const fileBuffer = fs.readFileSync(path);
+    const hashSum = crypto.createHash('sha256');
+    hashSum.update(fileBuffer);
+    return hashSum.digest('hex');
+}
 
 const optimizeVideos = async (logger) => {
+    
     logger.info('Video optimizer running!');
+    
+    const hashesDir = path.join(dirName, '../integrations')
+
+    const hashesPath = path.join(hashesDir, '/vidOptHashes.txt');
+    
+    let hashes = {};
+    
+    if(fs.existsSync(hashesPath)) {
+        const hashesFile = fs.readFileSync(hashesPath);
+        hashes = JSON.parse(hashesFile);
+    }
+    
     const inputDir = path.join(dirName, '../src/assets/videos');
     const outputDir = path.join(dirName, '../public/videos');
 
@@ -25,6 +47,17 @@ const optimizeVideos = async (logger) => {
     for (const video of videos) {
         const inputPath = path.join(inputDir, video);
         const baseName = path.basename(video, '.mp4');
+        
+        const filehash = getFileHash(inputPath);
+        if(!hashes.hasOwnProperty(video)) {
+            hashes[video] = "";
+        }
+        if (hashes[video] === filehash) {
+            continue;
+        } else {
+            hashes[video] = filehash;
+        }
+        
 
         //make the sizes
         for (const [index, size] of sizes.entries()) {
@@ -56,6 +89,9 @@ const optimizeVideos = async (logger) => {
             logger.error(`Poster failed for ${baseName}: ${error.message}`);
         }
     }
+    logger.info("All videos optimized!");
+    
+    fs.writeFileSync(hashesPath, JSON.stringify(hashes), 'utf-8');
 }
 export default function videoOptimizer() {
     return {
