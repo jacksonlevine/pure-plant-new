@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
-import mdx from "@astrojs/mdx";
 import videoOptimizer from './integrations/videoOptimizer.js';
 import {fileURLToPath} from "url";
 import sitemap from '@astrojs/sitemap';
@@ -22,7 +21,7 @@ export default defineConfig({
       }
   },
 
-  integrations: [react(), mdx(), videoOptimizer(), sitemap()], 
+  integrations: [react(), videoOptimizer(), sitemap()], 
     site: 'https://jacksonlevine.github.io',
     base: '/pure-plant-new',
 });

@@ -1,14 +1,14 @@
 ﻿---
-const { label, href } = Astro.props;
+const { label, href, invert = false } = Astro.props;
 ---
 
 
-<div class="flex flex-row justify-center items-center z-20 animate-fi px-10">
-    <a data-astro-prefetch href={href} class="px-8 py-4 text-xl font-semibold flex flex-row justify-center items-center h-full sm:min-w-sm 
+<div class=`${invert ? "invert" : ""} flex flex-row justify-center items-center z-20 animate-fi px-10`>
+    <a data-astro-prefetch href={href} class=`px-8 py-4 text-xl font-semibold flex flex-row justify-center items-center h-full sm:min-w-sm my-[2rem] md:my-0 
     bg-white/70 backdrop-blur-md border 
     border-white/30 rounded-full 
     text-black transition-all duration-300 
-    hover:bg-white/100 cursor-pointer hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-pulse">
+    hover:bg-white/100 cursor-pointer hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.3)] ${!invert ? "animate-pulse" : ""}`>
         {label}
     </a>
 </div>

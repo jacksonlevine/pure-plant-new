@@ -1,0 +1,130 @@
+﻿---
+import { Image } from "astro:assets";
+import Icon from "heroicons-astro/Heroicon.astro";
+
+export interface FooterLink {
+    name: string;
+    href: string;
+}
+
+export interface FooterLinkGroup {
+    title: string;
+    links: FooterLink[];
+}
+
+export interface SocialLink {
+    name: string;
+    href: string;
+    icon: string;
+}
+
+export interface Props {
+    logo?: {
+        src?: string;
+        alt?: string;
+        text?: string;
+    };
+    description?: string;
+    linkGroups?: FooterLinkGroup[];
+    socialLinks?: SocialLink[];
+    copyright?: string;
+    companyName?: string;
+}
+
+const {
+    logo,
+    description,
+    linkGroups: linkGroupsProp,
+    socialLinks: socialLinksProp,
+    copyright,
+    companyName = "Your Company",
+} = Astro.props;
+
+const linkGroups = Array.isArray(linkGroupsProp) ? linkGroupsProp : [];
+const socialLinks = Array.isArray(socialLinksProp) ? socialLinksProp : [];
+
+const currentYear = new Date().getFullYear();
+const copyrightText =
+    copyright || `© ${currentYear} ${companyName}. All rights reserved.`;
+---
+
+<footer class="bg-card border-t border-border">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
+        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+            <div class="space-y-8">
+                {
+                    logo && (
+                                <div>
+                                    {logo.src ? (
+                                            <Image
+                                                    src={logo.src}
+                                                    alt={logo.alt || companyName}
+                                                    width={32}
+                                                    height={32}
+                                                    class="h-8 w-auto"
+                                            />
+                                    ) : (
+                                            <span class="text-xl font-semibold text-foreground">
+                  {logo.text || companyName}
+                </span>
+                                    )}
+                                </div>
+                    )
+                }
+                {
+                    description && (
+                                <p class="text-sm leading-6 text-muted-foreground">{description}</p>
+                    )
+                }
+                {
+                    socialLinks.length > 0 && (
+                                <div class="flex gap-x-6">
+                                    {socialLinks.map((item) => {
+                                        return (
+                                                <a
+                                                        href={item.href}
+                                                        class="text-muted-foreground hover:text-foreground transition-colors"
+                                                        aria-label={item.name}
+                                                >
+                                                    <span class="sr-only">{item.name}</span>
+                                                    {item.icon && (
+                                                            <Icon iconCode={item.icon} customClasses="h-6 w-6" />
+                                                    )}
+                                                </a>
+                                        );
+                                    })}
+                                </div>
+                    )
+                }
+            </div>
+            <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+                <div class="md:grid md:grid-cols-2 md:gap-8">
+                    {
+                        linkGroups.map((group) => (
+                                <div>
+                                    <h3 class="text-sm font-semibold leading-6 text-foreground">
+                                        {group.title}
+                                    </h3>
+                                    <ul role="list" class="mt-6 space-y-4">
+                                        {group.links.map((link) => (
+                                                <li>
+                                                    <a
+                                                            href={link.href}
+                                                            class="text-sm leading-6 text-muted-foreground hover:text-foreground transition-colors"
+                                                    >
+                                                        {link.name}
+                                                    </a>
+                                                </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="mt-16 border-t border-border pt-8 sm:mt-20 lg:mt-24">
+            <p class="text-xs leading-5 text-muted-foreground">{copyrightText}</p>
+        </div>
+    </div>
+</footer>

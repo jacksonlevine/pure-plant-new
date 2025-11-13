@@ -2,8 +2,9 @@
 import {ClientRouter} from "astro:transitions";
 import Header from "../components/Header.astro";
 import "../styles/main.css";
+import Footer1 from "../components/Footer1.astro";
 const {TopElement } = Astro.props;
-
+import pplogo from "../assets/images/logo.png"
 ---
 
 <!doctype html>
@@ -23,5 +24,10 @@ const {TopElement } = Astro.props;
         </div>
         
 		<slot />
+        <Footer1
+                logo={{src: pplogo, alt: "Pure Plant logo", text: "Pure Plant"}}
+                description="Premium quality supplements with natural ingredients and sustainable sourcing."
+                companyName="Pure Plant Company"
+        />
 	</body>
 </html>

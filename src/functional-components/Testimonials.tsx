@@ -22,7 +22,7 @@ export default function Testimonials({ testimonials }:TestimonialsArg) {
     }, []);
 
     return (
-        <div className="flex flex-col justify-center items-center xl:max-w-2xl w-full animate-fi z-20">
+        <div className="flex flex-col justify-center items-center xl:max-w-2xl w-full animate-fi z-20 mb-[6rem] md:mb-0">
             <div className="bg-white/80 w-fit backdrop-blur-md rounded-lg p-6 border transition-all z-20 duration-300 hover:bg-white/100 hover:scale-105 border-white/20 min-h-32 flex flex-col justify-center w-full xl:min-w-[28rem]">
                 <p className="text-xl italic mb-3">"{testimonials[currentTestimonial].text}"</p>
                 <p className="text-sm font-semibold text-emerald-300">— {testimonials[currentTestimonial].author}</p>
