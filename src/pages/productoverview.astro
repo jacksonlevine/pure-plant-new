@@ -5,6 +5,11 @@ import Layout from "../layouts/Layout.astro";
 
 import staticProductInfo from "../assets/json/staticproductinfo.json";
 
+import {
+    getProductAggregateRating,
+    getProductReviewStructuredData,
+} from "../lib/reviews";
+
 const cognitiveTransform = staticProductInfo.neurozine;
 
 const neurotransmittedPrecision = staticProductInfo.serophan;
@@ -23,6 +28,19 @@ const showcaseProducts: { key: keyof typeof staticProductInfo; name: string }[] 
     { key: "serophan", name: "Serophan" },
     { key: "pureplantd3", name: "PurePlant D3" },
 ];
+
+const showcaseProductsWithSchema = showcaseProducts.map((product) => {
+    const aggregateRating = getProductAggregateRating(product.key);
+    const reviews = getProductReviewStructuredData(product.key);
+
+    return {
+        ...product,
+        aggregateRating,
+        reviews,
+    };
+});
+
+
 const structuredData = [
     {
         "@type": "WebPage",
@@ -40,7 +58,7 @@ const structuredData = [
         "@type": "ItemList",
         "@id": `${canonicalUrl}#overview-products`,
         name: "Pure Plant Flagship Supplement Overview",
-        itemListElement: showcaseProducts.map((product, index) => ({
+        itemListElement: showcaseProductsWithSchema.map((product, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: product.name,
@@ -55,6 +73,8 @@ const structuredData = [
                 url: staticProductInfo[product.key].productLink
                     ? `${site.origin}${staticProductInfo[product.key].productLink}`
                     : `${siteBase}/products/${product.key}`,
+                ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
+                ...(product.reviews.length ? { review: product.reviews } : {}),
             },
         })),
     },

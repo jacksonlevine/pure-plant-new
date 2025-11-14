@@ -12,7 +12,10 @@ import { VariantSelector } from "@/functional-components/product/VariantSelector
 import { getListPage } from "../../lib/contentParser.astro";
 import { getProduct, getProducts } from "@/lib/shopify";
 import Layout from "../../layouts/Layout.astro";
-
+import {
+    getProductAggregateRating,
+    getProductReviewStructuredData,
+} from "@/lib/reviews";
 export const prerender = true;
 
 export async function getStaticPaths() {
@@ -64,6 +67,10 @@ const productImages = images
     .map((image) => image?.url)
     .filter((url): url is string => Boolean(url));
 
+const productReviews = getProductReviewStructuredData(slug as string);
+const aggregateRating = getProductAggregateRating(slug as string);
+
+
 const offerList = variants.map((variant) => ({
     "@type": "Offer",
     price: variant.price.amount,
@@ -106,6 +113,8 @@ const productStructuredData = [
         },
         ...(productImages.length ? { image: productImages } : {}),
         ...(offersData ? { offers: offersData } : {}),
+        ...(aggregateRating ? { aggregateRating } : {}),
+        ...(productReviews.length ? { review: productReviews } : {}),
         sku: variants?.[0]?.id,
         url: productUrl,
         isRelatedTo: Object.entries(relatedProductHandles)

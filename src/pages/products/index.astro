@@ -11,6 +11,13 @@ import {
   getVendors,
 } from "@/lib/shopify";
 import type { PageInfo, Product } from "@/lib/shopify/types";
+
+import {
+    getProductAggregateRating,
+    getProductReviewStructuredData,
+} from "@/lib/reviews";
+
+
 import Layout from "../../layouts/Layout.astro";
 
 const searchParams = Astro.url.searchParams;
@@ -147,31 +154,39 @@ const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
 const canonicalUrl = new URL(Astro.url.pathname, site).toString();
 
 const itemListElements = (initialProducts || []).map(
-    (product: Product, index: number) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: product.title,
-        item: {
-            "@type": "Product",
+    (product: Product, index: number) => {
+        const aggregateRating = getProductAggregateRating(product.handle);
+        const reviews = getProductReviewStructuredData(product.handle);
+
+        return {
+            "@type": "ListItem",
+            position: index + 1,
             name: product.title,
-            description: product.description,
-            brand: {
-                "@type": "Brand",
-                name: product.vendor || "Pure Plant",
+            item: {
+                "@type": "Product",
+                name: product.title,
+                description: product.description,
+                brand: {
+                    "@type": "Brand",
+                    name: product.vendor || "Pure Plant",
+                },
+                sku: product?.variants?.[0]?.id,
+                url: `${siteBase}/products/${product.handle}`,
+                offers: {
+                    "@type": "AggregateOffer",
+                    priceCurrency: product.priceRange?.minVariantPrice?.currencyCode,
+                    lowPrice: product.priceRange?.minVariantPrice?.amount,
+                    highPrice: product.priceRange?.maxVariantPrice?.amount,
+                    availability: product.availableForSale
+                        ? "https://schema.org/InStock"
+                        : "https://schema.org/OutOfStock",
+                },
+                ...(aggregateRating ? { aggregateRating } : {}),
+                ...(reviews.length ? { review: reviews } : {}),
             },
-            sku: product?.variants?.[0]?.id,
-            url: `${siteBase}/products/${product.handle}`,
-            offers: {
-                "@type": "AggregateOffer",
-                priceCurrency: product.priceRange?.minVariantPrice?.currencyCode,
-                lowPrice: product.priceRange?.minVariantPrice?.amount,
-                highPrice: product.priceRange?.maxVariantPrice?.amount,
-                availability: product.availableForSale
-                    ? "https://schema.org/InStock"
-                    : "https://schema.org/OutOfStock",
-            },
-        },
-    })
+
+            }
+    }
 );
 
 const productsStructuredData = [
