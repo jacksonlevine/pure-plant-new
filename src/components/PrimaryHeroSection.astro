@@ -30,7 +30,7 @@ const testimonials = [
 ];
 
 
-import MolecularViewer from "../functional-components/MolecularViewer";
+import HeroPlantDisplay from "../functional-components/HeroPlantDisplay";
 import Video from "./Video.astro";
 
 const { isTopElement } = Astro.props;
@@ -88,7 +88,7 @@ const { isTopElement } = Astro.props;
                            
                           ">
                 </div>
-                <MolecularViewer client:only="react"/>
+                <HeroPlantDisplay client:only="react"/>
                 {/* Half 1*/}
                 <div class="flex w-full justify-start lg:justify-start lg:min-h-[50vh]">
                     
