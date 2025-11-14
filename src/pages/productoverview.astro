@@ -46,6 +46,20 @@ const showcaseProductsWithSchema = showcaseProducts.map((product) => {
     };
 });
 
+const showcaseProductNodes = showcaseProductsWithSchema.map((product) => ({
+    "@type": "Product",
+    "@id": product.id,
+    name: product.name,
+    description: staticProductInfo[product.key].description,
+    brand: {
+        "@type": "Brand",
+        name: "Pure Plant",
+    },
+    url: product.url,
+    ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
+    ...(product.reviews.length ? { review: product.reviews } : {}),
+}));
+
 
 const structuredData = [
     {
@@ -70,19 +84,11 @@ const structuredData = [
             name: product.name,
             item: {
                 "@type": "Product",
-                name: product.name,
-                description: staticProductInfo[product.key].description,
-                brand: {
-                    "@type": "Brand",
-                    name: "Pure Plant",
-                },
-                url: product.url,
                 "@id": product.id,
-                ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
-                ...(product.reviews.length ? { review: product.reviews } : {}),
             },
         })),
     },
+    ...showcaseProductNodes,
 ];
 ---
 <Layout
