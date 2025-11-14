@@ -32,9 +32,15 @@ const showcaseProducts: { key: keyof typeof staticProductInfo; name: string }[] 
 const showcaseProductsWithSchema = showcaseProducts.map((product) => {
     const aggregateRating = getProductAggregateRating(product.key);
     const reviews = getProductReviewStructuredData(product.key);
+    const defaultProductUrl = `${siteBase}/products/${product.key}`;
+    const resolvedUrl = staticProductInfo[product.key].productLink
+        ? `${site.origin}${staticProductInfo[product.key].productLink}`
+        : defaultProductUrl;
 
     return {
         ...product,
+        id: `${defaultProductUrl}#product`,
+        url: resolvedUrl,
         aggregateRating,
         reviews,
     };
@@ -70,9 +76,8 @@ const structuredData = [
                     "@type": "Brand",
                     name: "Pure Plant",
                 },
-                url: staticProductInfo[product.key].productLink
-                    ? `${site.origin}${staticProductInfo[product.key].productLink}`
-                    : `${siteBase}/products/${product.key}`,
+                url: product.url,
+                "@id": product.id,
                 ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
                 ...(product.reviews.length ? { review: product.reviews } : {}),
             },

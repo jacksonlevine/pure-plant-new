@@ -157,13 +157,16 @@ const itemListElements = (initialProducts || []).map(
     (product: Product, index: number) => {
         const aggregateRating = getProductAggregateRating(product.handle);
         const reviews = getProductReviewStructuredData(product.handle);
-
+        const productUrl = `${siteBase}/products/${product.handle}`;
+        const productId = `${productUrl}#product`;
+        
         return {
             "@type": "ListItem",
             position: index + 1,
             name: product.title,
             item: {
                 "@type": "Product",
+                "@id": productId,
                 name: product.title,
                 description: product.description,
                 brand: {

@@ -5,7 +5,7 @@
     datePublished?: string;
 };
 
-const reviewsByProduct: Record<string, Review[]> = {
+const reviewSource: Record<string, Review[]> = {
     serophan: [
         {
             author: "Sarah M.",
@@ -68,8 +68,14 @@ const reviewsByProduct: Record<string, Review[]> = {
     ],
 };
 
+const normalizeProductKey = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+const reviewsByProduct: Record<string, Review[]> = Object.fromEntries(
+    Object.entries(reviewSource).map(([key, value]) => [normalizeProductKey(key), value])
+);
+
 export function getProductReviews(slug: string): Review[] {
-    const key = slug.toLowerCase();
+    const key = normalizeProductKey(slug);
     return reviewsByProduct[key] ?? [];
 }
 

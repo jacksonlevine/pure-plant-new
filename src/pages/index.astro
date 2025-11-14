@@ -41,6 +41,7 @@ const featuredProducts = [
         ...product,
         description: productInfo[product.key].description,
         url: `${siteBase}/products/${product.key}`,
+        id: `${siteBase}/products/${product.key}#product`,
         aggregateRating,
         reviews,
     };
@@ -61,6 +62,7 @@ const homepageStructuredData = [
         inLanguage: "en",
         about: featuredProducts.map((product) => ({
             "@type": "Product",
+            "@id": product.id,
             name: product.name,
             description: product.description,
             brand: {
@@ -83,6 +85,7 @@ const homepageStructuredData = [
             name: product.name,
             item: {
                 "@type": "Product",
+                "@id": product.id,
                 name: product.name,
                 description: product.description,
                 brand: {

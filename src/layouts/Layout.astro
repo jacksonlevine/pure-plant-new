@@ -33,8 +33,11 @@ const featuredProducts = [
     { name: "Serophan", handle: "serophan" },
     { name: "Neurozine", handle: "neurozine" },
     { name: "PurePlant D3", handle: "pureplantd3" },
-];
-
+].map((product) => ({
+    ...product,
+    url: `${siteBase}/products/${product.handle}`,
+    productId: `${siteBase}/products/${product.handle}#product`,
+}));
 
 //POTENTIAL ACTIONS
 const potentialActions = [
@@ -43,14 +46,12 @@ const potentialActions = [
         target: `${siteBase}/products?q={search_term_string}`,
         "query-input": "required name=search_term_string",
     },
-    ...featuredProducts.map(({ name, handle }) => ({
+    ...featuredProducts.map(({ name, handle, productId }) => ({
         "@type": "ViewAction",
         name: `Browse ${name}`,
         target: `${siteBase}/products/${handle}`,
         potentialResult: {
-            "@type": "Product",
-            name,
-            url: `${siteBase}/products/${handle}`,
+            "@id": productId,
         },
     })),
 ];
