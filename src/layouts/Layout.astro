@@ -3,8 +3,97 @@ import {ClientRouter} from "astro:transitions";
 import Header from "../components/Header.astro";
 import "../styles/main.css";
 import Footer1 from "../components/Footer1.astro";
-const {TopElement } = Astro.props;
+
 import pplogo from "../assets/images/logo.png"
+
+
+
+
+
+//JSON-LD stuff:
+
+const {
+    TopElement,
+    title = "Pure Plant 2.0",
+    description = "Premium quality supplements with natural ingredients and sustainable sourcing.",
+    structuredData = [],
+} = Astro.props;
+
+const site = Astro.site;
+const basePath = import.meta.env.BASE_URL ?? "/";
+const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
+
+const organizationId = `${siteBase}/#organization`;
+const webSiteId = `${siteBase}/#website`;
+
+
+
+//FEATURED PRODUCTS
+const featuredProducts = [
+    { name: "Serophan", handle: "serophan" },
+    { name: "Neurozine", handle: "neurozine" },
+    { name: "PurePlant D3", handle: "pureplantd3" },
+];
+
+
+//POTENTIAL ACTIONS
+const potentialActions = [
+    {
+        "@type": "SearchAction",
+        target: `${siteBase}/products?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+    },
+    ...featuredProducts.map(({ name, handle }) => ({
+        "@type": "ViewAction",
+        name: `Browse ${name}`,
+        target: `${siteBase}/products/${handle}`,
+        potentialResult: {
+            "@type": "Product",
+            name,
+            url: `${siteBase}/products/${handle}`,
+        },
+    })),
+];
+
+
+const defaultGraph = [
+    {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: "Pure Plant Company",
+        url: siteBase,
+        logo: {
+            "@type": "ImageObject",
+            url: `${siteBase}/assets/images/logo.png`,
+        },
+        sameAs: [
+            "https://www.instagram.com/pureplant",
+            "https://www.facebook.com/pureplant",
+            "https://www.linkedin.com/company/pureplant",
+        ],
+        brand: "Pure Plant",
+    },
+    {
+        "@type": "WebSite",
+        "@id": webSiteId,
+        url: siteBase,
+        name: "Pure Plant Supplements",
+        publisher: {
+            "@id": organizationId,
+        },
+        potentialAction: potentialActions,
+    },
+];
+
+const structuredDataArray = Array.isArray(structuredData)
+    ? structuredData.filter(Boolean)
+    : [structuredData].filter(Boolean);
+
+const combinedStructuredData = [
+    ...defaultGraph,
+    ...structuredDataArray,
+];
+
 ---
 
 <!doctype html>
@@ -12,9 +101,11 @@ import pplogo from "../assets/images/logo.png"
 	<head>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Pure Plant 2.0</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        
         <ClientRouter/>
 	</head>
 	<body class="max-w-screen">
@@ -29,5 +120,16 @@ import pplogo from "../assets/images/logo.png"
                 description="Premium quality supplements with natural ingredients and sustainable sourcing."
                 companyName="Pure Plant Company"
         />
+        {combinedStructuredData.length > 0 && (
+            <script
+                type="application/ld+json"
+                set:html={`${
+                    JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@graph": combinedStructuredData,
+                    })
+                }`}
+                ></script>
+        )}
 	</body>
 </html>

@@ -5,12 +5,88 @@ import VitaminD3TruthRevelation from "../components/VitaminD3TruthRevelation.ast
 import TrustSignalsCertificationShowcase from "../functional-components/TrustSignalsCertificationShowcase"
 import ProductsStrip from "../components/ProductsStrip.astro";
 import CTAButton from "../components/CTAButton.astro";
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+//JSON LD stuff
+
+import productInfo from "../assets/json/staticproductinfo.json";
+
+const site = Astro.site ?? new URL("https://jacksonlevine.github.io");
+const basePath = import.meta.env.BASE_URL ?? "/";
+const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
+const canonicalUrl = new URL(Astro.url.pathname, site).toString();
+
+const featuredProducts = [
+    {
+        key: "serophan",
+        name: "Serophan",
+    },
+    {
+        key: "neurozine",
+        name: "Neurozine",
+    },
+    {
+        key: "pureplantd3",
+        name: "PurePlant D3",
+    },
+].map((product) => ({
+    ...product,
+    description: productInfo[product.key].description,
+    url: `${siteBase}/products/${product.key}`,
+}));
+
+const homepageStructuredData = [
+    {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: "Pure Plant Supplements for Mood, Cognition, and Immunity",
+        description:
+            "Discover Pure Plant's precision-formulated supplements including Serophan for mood, Neurozine for focus, and PurePlant D3 for immune health.",
+        isPartOf: {
+            "@id": `${siteBase}/#website`,
+        },
+        inLanguage: "en",
+        about: featuredProducts.map((product) => ({
+            "@type": "Product",
+            name: product.name,
+            description: product.description,
+            brand: {
+                "@type": "Brand",
+                name: "Pure Plant",
+            },
+            url: product.url,
+        })),
+    },
+    {
+        "@type": "ItemList",
+        "@id": `${canonicalUrl}#featured-products`,
+        name: "Featured Pure Plant Supplements",
+        description: "Curated lineup of Pure Plant's flagship supplements.",
+        itemListElement: featuredProducts.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: product.name,
+            item: {
+                "@type": "Product",
+                name: product.name,
+                description: product.description,
+                brand: {
+                    "@type": "Brand",
+                    name: "Pure Plant",
+                },
+                url: product.url,
+            },
+        })),
+    },
+];
 
 ---
 
-<Layout>
+<Layout
+        title="Pure Plant Supplements"
+        description="Pure Plant delivers precision-formulated supplements like Serophan, Neurozine, and PurePlant D3 for elevated mood, cognition, and immunity."
+        structuredData={homepageStructuredData}
+>
     <PrimaryHeroSection isTopElement={true}/>
     <ProductsStrip />
     <TrustSignalsCertificationShowcase client:load/>

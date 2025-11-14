@@ -11,9 +11,60 @@ const neurotransmittedPrecision = staticProductInfo.serophan;
 
 const cellularOptimization = staticProductInfo.pureplantd3;
 
-import landing2 from "../assets/videos/landing2.mp4";
+//JSON LD stuff
+
+const site = Astro.site ?? new URL("https://jacksonlevine.github.io");
+const basePath = import.meta.env.BASE_URL ?? "/";
+const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
+const canonicalUrl = new URL(Astro.url.pathname, site).toString();
+
+const showcaseProducts: { key: keyof typeof staticProductInfo; name: string }[] = [
+    { key: "neurozine", name: "Neurozine" },
+    { key: "serophan", name: "Serophan" },
+    { key: "pureplantd3", name: "PurePlant D3" },
+];
+const structuredData = [
+    {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: "Pure Plant Product Overview",
+        description:
+            "Dive into Pure Plant's flagship supplements—Neurozine, Serophan, and PurePlant D3—to understand their targeted benefits and science-backed formulations.",
+        isPartOf: {
+            "@id": `${siteBase}/#website`,
+        },
+        inLanguage: "en",
+    },
+    {
+        "@type": "ItemList",
+        "@id": `${canonicalUrl}#overview-products`,
+        name: "Pure Plant Flagship Supplement Overview",
+        itemListElement: showcaseProducts.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: product.name,
+            item: {
+                "@type": "Product",
+                name: product.name,
+                description: staticProductInfo[product.key].description,
+                brand: {
+                    "@type": "Brand",
+                    name: "Pure Plant",
+                },
+                url: staticProductInfo[product.key].productLink
+                    ? `${site.origin}${staticProductInfo[product.key].productLink}`
+                    : `${siteBase}/products/${product.key}`,
+            },
+        })),
+    },
+];
 ---
-<Layout>
+<Layout
+        title="Pure Plant Product Overview"
+        description="Understand what makes Pure Plant's Serophan, Neurozine, and PurePlant D3 unique through our immersive product showcase."
+        structuredData={structuredData}
+>
     <!--<video-->
     <!--        class="fixed top-0 left-0 w-full h-full object-cover z-[-50]"-->
     <!--        autoplay-->
