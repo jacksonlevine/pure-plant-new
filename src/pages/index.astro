@@ -33,7 +33,9 @@ const featuredProducts = [
         key: "pureplantd3",
         name: "PurePlant D3",
     },
-].map((product) => {
+];
+
+const featuredProductsWithSchema = featuredProducts.map((product) => {
     const aggregateRating = getProductAggregateRating(product.key);
     const reviews = getProductReviewStructuredData(product.key);
 
@@ -46,6 +48,20 @@ const featuredProducts = [
         reviews,
     };
 });
+
+const featuredProductNodes = featuredProductsWithSchema.map((product) => ({
+    "@type": "Product",
+    "@id": product.id,
+    name: product.name,
+    description: product.description,
+    brand: {
+        "@type": "Brand",
+        name: "Pure Plant",
+    },
+    url: product.url,
+    ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
+    ...(product.reviews.length ? { review: product.reviews } : {}),
+}));
 
 
 const homepageStructuredData = [
@@ -60,18 +76,9 @@ const homepageStructuredData = [
             "@id": `${siteBase}/#website`,
         },
         inLanguage: "en",
-        about: featuredProducts.map((product) => ({
+        about: featuredProductsWithSchema.map((product) => ({
             "@type": "Product",
             "@id": product.id,
-            name: product.name,
-            description: product.description,
-            brand: {
-                "@type": "Brand",
-                name: "Pure Plant",
-            },
-            url: product.url,
-            ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
-            ...(product.reviews.length ? { review: product.reviews } : {}),
         })),
     },
     {
@@ -79,25 +86,17 @@ const homepageStructuredData = [
         "@id": `${canonicalUrl}#featured-products`,
         name: "Featured Pure Plant Supplements",
         description: "Curated lineup of Pure Plant's flagship supplements.",
-        itemListElement: featuredProducts.map((product, index) => ({
+        itemListElement: featuredProductsWithSchema.map((product, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: product.name,
             item: {
                 "@type": "Product",
                 "@id": product.id,
-                name: product.name,
-                description: product.description,
-                brand: {
-                    "@type": "Brand",
-                    name: "Pure Plant",
-                },
-                url: product.url,
-                ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
-                ...(product.reviews.length ? { review: product.reviews } : {}),
             },
         })),
     },
+    ...featuredProductNodes,
 ];
 
 ---

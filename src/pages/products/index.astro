@@ -153,44 +153,50 @@ const basePath = import.meta.env.BASE_URL ?? "/";
 const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
 const canonicalUrl = new URL(Astro.url.pathname, site).toString();
 
-const itemListElements = (initialProducts || []).map(
-    (product: Product, index: number) => {
-        const aggregateRating = getProductAggregateRating(product.handle);
-        const reviews = getProductReviewStructuredData(product.handle);
-        const productUrl = `${siteBase}/products/${product.handle}`;
-        const productId = `${productUrl}#product`;
-        
-        return {
+const catalogProducts = (initialProducts || []).map((product: Product, index: number) => {
+    const aggregateRating = getProductAggregateRating(product.handle);
+    const reviews = getProductReviewStructuredData(product.handle);
+    const productUrl = `${siteBase}/products/${product.handle}`;
+    const productId = `${productUrl}#product`;
+
+    return {
+        listItem: {
             "@type": "ListItem",
             position: index + 1,
             name: product.title,
             item: {
                 "@type": "Product",
                 "@id": productId,
-                name: product.title,
-                description: product.description,
-                brand: {
-                    "@type": "Brand",
-                    name: product.vendor || "Pure Plant",
-                },
-                sku: product?.variants?.[0]?.id,
-                url: `${siteBase}/products/${product.handle}`,
-                offers: {
-                    "@type": "AggregateOffer",
-                    priceCurrency: product.priceRange?.minVariantPrice?.currencyCode,
-                    lowPrice: product.priceRange?.minVariantPrice?.amount,
-                    highPrice: product.priceRange?.maxVariantPrice?.amount,
-                    availability: product.availableForSale
-                        ? "https://schema.org/InStock"
-                        : "https://schema.org/OutOfStock",
-                },
-                ...(aggregateRating ? { aggregateRating } : {}),
-                ...(reviews.length ? { review: reviews } : {}),
             },
+        },
+        node: {
+            "@type": "Product",
+            "@id": productId,
+            name: product.title,
+            description: product.description,
+            brand: {
+                "@type": "Brand",
+                name: product.vendor || "Pure Plant",
+            },
+            sku: product?.variants?.[0]?.id,
+            url: productUrl,
+            offers: {
+                "@type": "AggregateOffer",
+                priceCurrency: product.priceRange?.minVariantPrice?.currencyCode,
+                lowPrice: product.priceRange?.minVariantPrice?.amount,
+                highPrice: product.priceRange?.maxVariantPrice?.amount,
+                availability: product.availableForSale
+                    ? "https://schema.org/InStock"
+                    : "https://schema.org/OutOfStock",
+            },
+            ...(aggregateRating ? { aggregateRating } : {}),
+            ...(reviews.length ? { review: reviews } : {}),
+        },
+    };
+});
 
-            }
-    }
-);
+const itemListElements = catalogProducts.map((product) => product.listItem);
+const catalogProductNodes = catalogProducts.map((product) => product.node);
 
 const productsStructuredData = [
     {
@@ -213,6 +219,7 @@ const productsStructuredData = [
         itemListOrder: "https://schema.org/ItemListOrderAscending",
         itemListElement: itemListElements,
     },
+    ...catalogProductNodes,
 ];
 
 
