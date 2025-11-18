@@ -1,12 +1,6 @@
 ﻿---
 import Video from "./Video.astro";
-const testimonials = [
-    { text: "I had no idea my supplements came from sheep’s wool—absolutely shocking", author: "Sarah M." },
-    { text: "Learning the truth made me switch immediately to plant-based Vitamin D3", author: "Dr. James K." },
-    { text: "The process with lanolin disgusted me—pine tree sourcing feels so much cleaner", author: "Michael R." },
-    { text: "Once I discovered the difference, I could never go back to wool-derived D3", author: "Emily T." },
-    { text: "It’s a relief knowing my Vitamin D3 now comes from a pure, plant source", author: "David L." },
-];
+import testimonials from "../../content/testimonials/d3revelation.json"
 
 import FadeInOnScroll from "../functional-components/FadeInOnScroll";
 
@@ -20,6 +14,10 @@ import badges from "../assets/images/badge.png"
 import Testimonials from "../functional-components/Testimonials";
 
 const {isTopElement} = Astro.props;
+
+import revelationCopy from "../../content/d3revelationcopy.json";
+import sciAuthCopy from "../../content/scientificauthority.json";
+
 ---
 
 
@@ -40,22 +38,17 @@ const {isTopElement} = Astro.props;
 
     <div class="flex flex-col justify-center items-start xl:px-[12rem] z-0">
         
-        <h1 class="xl:!text-7xl xl:min-h-fit md:!text-5xl sm:!text-3xl font-bold w-full text-center ">The Disgusting Truth About Your Vitamin D3</h1>
+        <h1 class="xl:!text-7xl xl:min-h-fit md:!text-5xl sm:!text-3xl font-bold w-full text-center ">revelationCopy.title</h1>
 
         <div class="xl:max-w-2/3 p-[1rem]  mb-[3rem]">
-            <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">What if we told you that more than 99% of Vitamin D3 supplements
-                come from sheep's grease? That's right - lanolin, the waxy, greasy
-                substance scraped from sheep, is processed into what you
-                think is 'natural' Vitamin D3.</h3>
+            <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">revelationCopy.p1</h3>
 
         </div>
         <div class="flex flex-row justify-end w-full">
-            <h3 class="text-xl pb-[3rem] animate-fi-2 xl:max-w-2/3 text-shadow-md">PurePlantD3® changes everything. Using our proprietary actinic process,
-                we transform organic pine tree sterols into pure, bioidentical
-                cholecalciferol - exactly how your body makes it naturally.</h3>
+            <h3 class="text-xl pb-[3rem] animate-fi-2 xl:max-w-2/3 text-shadow-md">revelationCopy.p2</h3>
         </div>
         <div class="xl:max-w-2/3 p-[1rem]  mb-[3rem] text-shadow-md">
-            <h2 class="!text-4xl animate-fi-3">No sheep. No grease. No compromise.</h2>
+            <h2 class="!text-4xl animate-fi-3">revelationCopy.conclusion</h2>
         </div>
         <div class="flex flex-row justify-center w-full mb-[10rem]">
             <Testimonials client:load testimonials={testimonials} />
@@ -120,7 +113,7 @@ const {isTopElement} = Astro.props;
             <div class="w-full mt-24">
                 <div class="w-full text-center">
                     <h1 class="!text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                        Pharmaceutical-Like Purity From Plants
+                        sciAuthCopy.title
                     </h1>
                 </div>
 
@@ -128,17 +121,10 @@ const {isTopElement} = Astro.props;
 
                     <div class="max-w-3xl mx-auto mt-12 space-y-6 text-xl leading-relaxed">
                         <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">
-
-                            While others settle for crude extracts and synthetic compounds,
-                            we've achieved something extraordinary: <span class="font-bold text-emerald-400">99.0%+ pure, isolated
-                                        phytochemicals</span> that work exactly as nature intended.
-
+                            sciAuthCopy.p1
                         </h3>
                         <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">
-
-                            Our precision biological interventions don't just support your
-                            health - they <span class="font-bold">optimize your biological potential at the cellular level</span>.
-
+                            sciAuthCopy.p2
                         </h3>
                     </div>
 

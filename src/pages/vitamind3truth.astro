@@ -5,7 +5,7 @@ import VitaminD3TruthRevelation from "../components/VitaminD3TruthRevelation.ast
 
 //JSON LD stuff
 
-const site = Astro.site ?? new URL("https://jacksonlevine.github.io");
+const site = Astro.site;
 const basePath = import.meta.env.BASE_URL ?? "/";
 const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
 const canonicalUrl = new URL(Astro.url.pathname, site).toString();

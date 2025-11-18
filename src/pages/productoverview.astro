@@ -3,7 +3,7 @@ import ProductShowcaseSection from "../components/ProductShowcaseSection.astro"
 import type ProductShowcaseContent from "../components/ProductShowcaseSection.astro";
 import Layout from "../layouts/Layout.astro";
 
-import staticProductInfo from "../assets/json/staticproductinfo.json";
+import staticProductInfo from "../../content/productcopy.json";
 
 import {
     getProductAggregateRating,
@@ -18,7 +18,7 @@ const cellularOptimization = staticProductInfo.pureplantd3;
 
 //JSON LD stuff
 
-const site = Astro.site ?? new URL("https://jacksonlevine.github.io");
+const site = Astro.site;
 const basePath = import.meta.env.BASE_URL ?? "/";
 const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
 const canonicalUrl = new URL(Astro.url.pathname, site).toString();

@@ -8,14 +8,14 @@ import CTAButton from "../components/CTAButton.astro";
 
 //JSON LD stuff
 
-import productInfo from "../assets/json/staticproductinfo.json";
+import productInfo from "../../content/productcopy.json";
 import {
     getProductAggregateRating,
     getProductReviewStructuredData,
 } from "../lib/reviews";
 
 
-const site = Astro.site ?? new URL("https://jacksonlevine.github.io");
+const site = Astro.site;
 const basePath = import.meta.env.BASE_URL ?? "/";
 const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
 const canonicalUrl = new URL(Astro.url.pathname, site).toString();
