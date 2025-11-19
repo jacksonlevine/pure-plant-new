@@ -1,0 +1,124 @@
+﻿---
+import Layout from '../../layouts/Layout.astro';
+import PrimaryHeroSection from "../../components/PrimaryHeroSection.astro";
+import TrustSignalsCertificationShowcase from "../../functional-components/TrustSignalsCertificationShowcase";
+import ProductsStrip from "../../components/ProductsStrip.astro";
+import CTAButton from "../../components/CTAButton.astro";
+import { loadContent } from '../../lib/contentLoader';
+import { getLocaleStaticPaths, localizedPath, localizedSiteUrl, resolveLocaleFromParams } from '../../lib/i18n/paths';
+import type { LocaleCode } from '../../lib/i18n/config';
+import { getProductAggregateRating, getProductReviewStructuredData } from "../../lib/reviews";
+
+export const prerender = true;
+export function getStaticPaths() {
+    return getLocaleStaticPaths();
+}
+
+const locale = resolveLocaleFromParams(Astro.params) as LocaleCode;
+const heroCopy = loadContent(locale, 'herocopy.json');
+const heroTestimonials = loadContent(locale, 'testimonials/primaryhero.json');
+const productInfo = loadContent(locale, 'productcopy.json');
+
+const siteBase = localizedSiteUrl(Astro, locale, '/');
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+const featuredProducts = [
+    {
+        key: "serophan",
+        name: "Serophan",
+    },
+    {
+        key: "neurozine",
+        name: "Neurozine",
+    },
+    {
+        key: "pureplantd3",
+        name: "PurePlant D3",
+    },
+];
+
+const featuredProductsWithSchema = featuredProducts.map((product) => {
+    const aggregateRating = getProductAggregateRating(product.key);
+    const reviews = getProductReviewStructuredData(product.key);
+
+    return {
+        ...product,
+        description: productInfo[product.key].description,
+        url: localizedSiteUrl(Astro, locale, `/products/${product.key}`),
+        id: `${localizedSiteUrl(Astro, locale, `/products/${product.key}`)}#product`,
+        aggregateRating,
+        reviews,
+    };
+});
+
+const featuredProductNodes = featuredProductsWithSchema.map((product) => ({
+    "@type": "Product",
+    "@id": product.id,
+    name: product.name,
+    description: product.description,
+    brand: {
+        "@type": "Brand",
+        name: "Pure Plant",
+    },
+    url: product.url,
+    ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
+    ...(product.reviews.length ? { review: product.reviews } : {}),
+}));
+
+const homepageStructuredData = [
+    {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: "Pure Plant Supplements for Mood, Cognition, and Immunity",
+        description:
+            "Discover Pure Plant's precision-formulated supplements including Serophan for mood, Neurozine for focus, and PurePlant D3 for immune health.",
+        isPartOf: {
+            "@id": `${siteBase}#website`,
+        },
+        inLanguage: locale,
+        about: featuredProductsWithSchema.map((product) => ({
+            "@type": "Product",
+            "@id": product.id,
+        })),
+    },
+    {
+        "@type": "ItemList",
+        "@id": `${canonicalUrl}#featured-products`,
+        name: "Featured Pure Plant Supplements",
+        description: "Curated lineup of Pure Plant's flagship supplements.",
+        itemListElement: featuredProductsWithSchema.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: product.name,
+            item: {
+                "@type": "Product",
+                "@id": product.id,
+            },
+        })),
+    },
+    ...featuredProductNodes,
+];
+
+const productPaths = {
+    neurozine: localizedPath(locale, '/products/neurozine'),
+    serophan: localizedPath(locale, '/products/serophan'),
+    pureplantd3: localizedPath(locale, '/products/pureplantd3'),
+};
+
+---
+
+<Layout
+        title="Pure Plant Supplements"
+        description="Pure Plant delivers precision-formulated supplements like Serophan, Neurozine, and PurePlant D3 for elevated mood, cognition, and immunity."
+        structuredData={homepageStructuredData}
+        lang={locale}
+>
+    <PrimaryHeroSection isTopElement={true} copy={heroCopy} testimonials={heroTestimonials} ctaHref={localizedPath(locale, '/productoverview')}/>
+    <ProductsStrip productsCopy={productInfo} productPaths={productPaths} />
+    <TrustSignalsCertificationShowcase client:load/>
+    <div class="w-full text-center min-h-[10rem]">
+        <h3 class="py-[2rem]">Our premium bottles are made from sustainable recycled glass. No plastic waste, earth-friendly and infinitely reusable.</h3>
+        <CTAButton invert={true} label="Learn more about our sustainable impact." href={localizedPath(locale, '/vitamind3truth')}/>
+    </div>
+</Layout>

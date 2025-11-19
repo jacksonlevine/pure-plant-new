@@ -6,7 +6,8 @@ import Footer1 from "../components/Footer1.astro";
 
 import pplogo from "../assets/images/logo.png"
 
-
+import { localizedPath } from "../lib/i18n/paths";
+import { defaultLocale, type LocaleCode } from "../lib/i18n/config";
 
 
 
@@ -17,11 +18,13 @@ const {
     title = "Pure Plant 2.0",
     description = "Premium quality supplements with natural ingredients and sustainable sourcing.",
     structuredData = [],
+    lang = defaultLocale,
 } = Astro.props;
 
 const site = Astro.site;
 const basePath = import.meta.env.BASE_URL ?? "/";
-const siteBase = new URL(basePath, site).toString().replace(/\/$/, "");
+const normalizedLang = (lang as LocaleCode) || defaultLocale;
+const siteBase = new URL(localizedPath(normalizedLang, '/'), site).toString().replace(/\/$/, "");
 
 const organizationId = `${siteBase}/#organization`;
 const webSiteId = `${siteBase}/#website`;
@@ -98,7 +101,7 @@ const combinedStructuredData = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={normalizedLang}>
 	<head>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>

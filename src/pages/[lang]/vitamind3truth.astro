@@ -1,0 +1,55 @@
+﻿---
+import Layout from '../../layouts/Layout.astro';
+import VitaminD3TruthRevelation from "../../components/VitaminD3TruthRevelation.astro";
+import { loadContent } from "../../lib/contentLoader";
+import { getLocaleStaticPaths, localizedSiteUrl, resolveLocaleFromParams } from "../../lib/i18n/paths";
+import type { LocaleCode } from "../../lib/i18n/config";
+
+export const prerender = true;
+export function getStaticPaths() {
+    return getLocaleStaticPaths();
+}
+
+const locale = resolveLocaleFromParams(Astro.params) as LocaleCode;
+const revelationCopy = loadContent(locale, 'd3revelationcopy.json');
+const scientificAuthorityCopy = loadContent(locale, 'scientificauthority.json');
+const testimonials = loadContent(locale, 'testimonials/d3revelation.json');
+
+const siteBase = localizedSiteUrl(Astro, locale, '/');
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+const structuredData = [
+    {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: "The Truth About Vitamin D3",
+        description:
+            "Explore Pure Plant's research-backed perspective on vitamin D3 sourcing, bioavailability, and its impact on immune performance.",
+        isPartOf: {
+            "@id": `${siteBase}#website`,
+        },
+        inLanguage: locale,
+        about: {
+            "@type": "Product",
+            "@id": `${localizedSiteUrl(Astro, locale, '/products/pureplantd3')}#product`,
+            name: "PurePlant D3",
+            brand: {
+                "@type": "Brand",
+                name: "Pure Plant",
+            },
+            url: localizedSiteUrl(Astro, locale, '/products/pureplantd3'),
+        },
+    },
+];
+
+---
+
+<Layout
+        title="PurePlant D3 Truth"
+        description="Learn why PurePlant D3 delivers superior, pine-derived vitamin D3 for immune resilience and whole-body health."
+        structuredData={structuredData}
+        lang={locale}
+>
+    <VitaminD3TruthRevelation revelationCopy={revelationCopy} scientificAuthorityCopy={scientificAuthorityCopy} testimonials={testimonials}/>
+</Layout>

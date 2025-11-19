@@ -1,6 +1,5 @@
 ﻿---
 import Video from "./Video.astro";
-import testimonials from "../../content/testimonials/d3revelation.json"
 
 import FadeInOnScroll from "../functional-components/FadeInOnScroll";
 
@@ -13,10 +12,7 @@ import badges from "../assets/images/badge.png"
 
 import Testimonials from "../functional-components/Testimonials";
 
-const {isTopElement} = Astro.props;
-
-import revelationCopy from "../../content/d3revelationcopy.json";
-import sciAuthCopy from "../../content/scientificauthority.json";
+const {isTopElement, testimonials, revelationCopy, scientificAuthorityCopy} = Astro.props;
 
 ---
 
@@ -113,7 +109,7 @@ import sciAuthCopy from "../../content/scientificauthority.json";
             <div class="w-full mt-24">
                 <div class="w-full text-center">
                     <h1 class="!text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                        {sciAuthCopy.title}
+                        {scientificAuthorityCopy.title}
                     </h1>
                 </div>
 
@@ -121,10 +117,10 @@ import sciAuthCopy from "../../content/scientificauthority.json";
 
                     <div class="max-w-3xl mx-auto mt-12 space-y-6 text-xl leading-relaxed">
                         <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">
-                            {sciAuthCopy.p1}
+                            {scientificAuthorityCopy.p1}
                         </h3>
                         <h3 class="text-xl pb-[3rem] animate-fi text-shadow-md">
-                            {sciAuthCopy.p2}
+                            {scientificAuthorityCopy.p2}
                         </h3>
                     </div>
 
@@ -163,7 +159,6 @@ import sciAuthCopy from "../../content/scientificauthority.json";
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <FadeInOnScroll client:load >
                     <div class="flex flex-row justify-center items-center mt-[6rem] drop-shadow-lg">

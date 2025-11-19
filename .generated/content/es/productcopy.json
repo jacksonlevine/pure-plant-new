@@ -1,0 +1,41 @@
+{
+  "neurozine": {
+    "title": "Desbloquea tu potencial cognitivo",
+    "description": "Esto no es solo apoyo cognitivo, es tu clave para desbloquear un estado de máximo rendimiento mental. Neurozine® está diseñado para el objetivo del láser, el recuerdo rápido y la profunda claridad mental necesaria para ganar un borde competitivo en el trabajo y en la vida.",
+    "benefits": [
+      "La claridad mental que corta a través de la niebla del cerebro",
+      "Mejora de memoria que te sorprende",
+      "Intensidad focal que transforma la productividad",
+      "Rendimiento cognitivo que te distingue"
+    ],
+    "productLink": "/pure-plant-new/products/neurozine",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": false
+  },
+  "serophan": {
+    "title": "Neurotransmisor de precisión Síntesis",
+    "description": "No interrumpas tu biología, mantenla. Serophan® proporciona el bloque de construcción puro y esencial que su cuerpo utiliza para crear serotonina natural. El resultado es un estado de ánimo equilibrado, sueño tranquilo y un estado de bienestar tranquilo, sin los efectos secundarios o complejidades de las intervenciones farmacéuticas.†",
+    "benefits": [
+      "Equilibrio de humor natural sin trastornos farmacéuticos",
+      "Calidad del sueño que transforma tu recuperación",
+      "Regulación competitiva que soporta peso saludable",
+      "Estabilidad emocional que mejora las relaciones"
+    ],
+    "productLink": "/pure-plant-new/products/serophan",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": true
+  },
+  "pureplantd3": {
+    "title": "Optimización genómica celular",
+    "description": "Su cuerpo funciona con vitamina D. Por eso lo perfeccionamos. Puro, pinos, y bioidentico al D3 que tu cuerpo hace desde el sol, PurePlantD3® ofrece soporte fundacional para la inmunidad robusta, huesos fuertes y un estado de ánimo positivo. Todo sin rastro de grasa de ovejas.",
+    "benefits": [
+      "Fuerza ósea que dura toda la vida",
+      "Función inmune que protege y mejora",
+      "Fuerza muscular que mejora con la edad",
+      "Salud cardiovascular que energiza la vida"
+    ],
+    "productLink": "/pure-plant-new/products/pureplantd3",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": false
+  }
+}

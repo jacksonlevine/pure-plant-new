@@ -2,19 +2,18 @@
 
 import FPProduct from "./FPProduct.astro";
 
-import staticProductInfo from "../../content/productcopy.json";
+const { productsCopy, productPaths } = Astro.props;
+const neurozine = productsCopy.neurozine;
 
-const neurozine = staticProductInfo.neurozine;
+const serophan = productsCopy.serophan;
 
-const serophan = staticProductInfo.serophan;
-
-const pureplantd3 = staticProductInfo.pureplantd3;
+const pureplantd3 = productsCopy.pureplantd3;
 
 ---
 
 
 <div class="w-full flex flex-col lg:flex-row items-center justify-evenly lg:px-[4rem]">
-    <FPProduct benefits={neurozine.benefits} name="Neurozine" href="/pure-plant-new/products/neurozine"/>
-    <FPProduct benefits={pureplantd3.benefits} name="PurePlantD3" href="/pure-plant-new/products/pureplantd3"/>
-    <FPProduct benefits={serophan.benefits} name="Serophan" href="/pure-plant-new/products/serophan"/>
+    <FPProduct benefits={neurozine.benefits} name="Neurozine" href={productPaths.neurozine}/>
+    <FPProduct benefits={pureplantd3.benefits} name="PurePlantD3" href={productPaths.pureplantd3}/>
+    <FPProduct benefits={serophan.benefits} name="Serophan" href={productPaths.serophan}/>
 </div>

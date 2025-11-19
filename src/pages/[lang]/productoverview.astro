@@ -1,0 +1,106 @@
+﻿---
+import ProductShowcaseSection from "../../components/ProductShowcaseSection.astro";
+import Layout from "../../layouts/Layout.astro";
+import { loadContent } from "../../lib/contentLoader";
+import { getLocaleStaticPaths, localizedSiteUrl, resolveLocaleFromParams } from "../../lib/i18n/paths";
+import type { LocaleCode } from "../../lib/i18n/config";
+import { getProductAggregateRating, getProductReviewStructuredData } from "../../lib/reviews";
+
+export const prerender = true;
+export function getStaticPaths() {
+    return getLocaleStaticPaths();
+}
+
+const locale = resolveLocaleFromParams(Astro.params) as LocaleCode;
+const staticProductInfo = loadContent(locale, 'productcopy.json');
+
+const cognitiveTransform = staticProductInfo.neurozine;
+
+const neurotransmittedPrecision = staticProductInfo.serophan;
+
+const cellularOptimization = staticProductInfo.pureplantd3;
+
+const siteBase = localizedSiteUrl(Astro, locale, '/');
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+const showcaseProducts = [
+    { key: "neurozine", name: "Neurozine" },
+    { key: "serophan", name: "Serophan" },
+    { key: "pureplantd3", name: "PurePlant D3" },
+];
+
+const showcaseProductsWithSchema = showcaseProducts.map((product) => {
+    const aggregateRating = getProductAggregateRating(product.key);
+    const reviews = getProductReviewStructuredData(product.key);
+    const defaultProductUrl = localizedSiteUrl(Astro, locale, `/products/${product.key}`);
+    const resolvedUrl = staticProductInfo[product.key].productLink
+        ? `${Astro.site.origin}${staticProductInfo[product.key].productLink}`
+        : defaultProductUrl;
+
+    return {
+        ...product,
+        id: `${defaultProductUrl}#product`,
+        url: resolvedUrl,
+        aggregateRating,
+        reviews,
+    };
+});
+
+const showcaseProductNodes = showcaseProductsWithSchema.map((product) => ({
+    "@type": "Product",
+    "@id": product.id,
+    name: product.name,
+    description: staticProductInfo[product.key].description,
+    brand: {
+        "@type": "Brand",
+        name: "Pure Plant",
+    },
+    url: product.url,
+    ...(product.aggregateRating ? { aggregateRating: product.aggregateRating } : {}),
+    ...(product.reviews.length ? { review: product.reviews } : {}),
+}));
+
+
+const structuredData = [
+    {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: "Pure Plant Product Overview",
+        description:
+            "Dive into Pure Plant's flagship supplements—Neurozine, Serophan, and PurePlant D3—to understand their targeted benefits and science-backed formulations.",
+        isPartOf: {
+            "@id": `${siteBase}#website`,
+        },
+        inLanguage: locale,
+    },
+    {
+        "@type": "ItemList",
+        "@id": `${canonicalUrl}#overview-products`,
+        name: "Pure Plant Flagship Supplement Overview",
+        itemListElement: showcaseProductsWithSchema.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: product.name,
+            item: {
+                "@type": "Product",
+                "@id": product.id,
+            },
+        })),
+    },
+    ...showcaseProductNodes,
+];
+---
+<Layout
+        title="Pure Plant Product Overview"
+        description="Understand what makes Pure Plant's Serophan, Neurozine, and PurePlant D3 unique through our immersive product showcase."
+        structuredData={structuredData}
+        lang={locale}
+>
+    <script>
+        import('@google/model-viewer/dist/model-viewer');
+    </script>
+    <ProductShowcaseSection content={cognitiveTransform} isTopElement={true}/>
+    <ProductShowcaseSection content={neurotransmittedPrecision} />
+    <ProductShowcaseSection content={cellularOptimization} />
+</Layout>

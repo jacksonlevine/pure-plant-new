@@ -5,6 +5,9 @@ import react from "@astrojs/react";
 import videoOptimizer from './integrations/videoOptimizer.js';
 import {fileURLToPath} from "url";
 import sitemap from '@astrojs/sitemap';
+import autoTranslate from './integrations/autoTranslate.js';
+
+
 // https://astro.build/config
 export default defineConfig({
 
@@ -21,7 +24,7 @@ export default defineConfig({
       }
   },
 
-  integrations: [react(), videoOptimizer(), sitemap()], 
+  integrations: [react(), videoOptimizer(), autoTranslate(), sitemap()], 
     site: 'https://jacksonlevine.github.io',
     base: '/pure-plant-new',
 });

@@ -4,17 +4,13 @@ import Testimonials from "../functional-components/Testimonials";
 
 import herocopy from "../../content/herocopy.json";
 
-const options = herocopy;
-const selectedOption = 1;
-const selectedContent = options[selectedOption];
-
-import testimonials from "../../content/testimonials/primaryhero.json"
-
 import HeroPlantDisplay from "../functional-components/HeroPlantDisplay";
 import Video from "./Video.astro";
 
-const { isTopElement } = Astro.props;
-
+const { isTopElement, copy, testimonials, ctaHref } = Astro.props;
+const options = copy;
+const selectedOption = 1;
+const selectedContent = options[selectedOption];
 ---
 
 <div data-vid-background-container class="h-full max-w-screen -z-10 bottomfade">
@@ -119,7 +115,7 @@ const { isTopElement } = Astro.props;
 
 
             <div class="flex flex-col lg:flex-row justify-between max-w-screen lg:py-20  w-full">
-                <CTAButton label={selectedContent.cta} href="/pure-plant-new/productoverview"/>
+                <CTAButton label={selectedContent.cta} href={ctaHref}/>
                 <Testimonials client:load testimonials={testimonials}/>
             </div>
 
