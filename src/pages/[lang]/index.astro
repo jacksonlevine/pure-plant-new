@@ -9,10 +9,18 @@ import { getLocaleStaticPaths, localizedPath, localizedSiteUrl, resolveLocaleFro
 import type { LocaleCode } from '../../lib/i18n/config';
 import { getProductAggregateRating, getProductReviewStructuredData } from "../../lib/reviews";
 
+import type {
+    InferGetStaticParamsType,
+    InferGetStaticPropsType,
+    GetStaticPaths,
+} from "astro";
+
+
+//Astro stuff telling it what static paths we have. 
 export const prerender = true;
 export function getStaticPaths() {
     return getLocaleStaticPaths();
-}
+} satisfies GetStaticPaths;
 
 const locale = resolveLocaleFromParams(Astro.params) as LocaleCode;
 const heroCopy = loadContent(locale, 'herocopy.json');
@@ -86,7 +94,7 @@ const homepageStructuredData = [
         "@type": "ItemList",
         "@id": `${canonicalUrl}#featured-products`,
         name: "Featured Pure Plant Supplements",
-        description: "Curated lineup of Pure Plant's flagship supplements.",
+        description: "Pure Plant's flagship supplements.",
         itemListElement: featuredProductsWithSchema.map((product, index) => ({
             "@type": "ListItem",
             position: index + 1,

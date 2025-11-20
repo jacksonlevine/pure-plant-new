@@ -5,12 +5,50 @@ import path from "node:path";
 import { contentRoot, ensureGeneratedLocaleDir } from "../src/lib/i18n/paths";
 import { defaultLocale, locales } from "../src/lib/i18n/config";
 
-import {
-    startLibreTranslate,
-    stopLibreTranslate,
-    waitUntilReady,
-    translateObject
-} from "../src/lib/i18n/libretranslate";
+import {TranslationServiceClient} from '@google-cloud/translate';
+
+
+//Google translate api stuff
+const translationClient = new TranslationServiceClient();
+
+const projectId = 'translatetest-478703';
+const location = 'global';
+//
+
+export async function translateObject(input: any, locale: string): Promise<any> {
+    if (typeof input === "string") {
+        return translateText(input, locale);
+    }
+    if (Array.isArray(input)) {
+        return Promise.all(input.map((x) => translateObject(x, locale)));
+    }
+    if (input && typeof input === "object") {
+        const out: any = {};
+        for (const k of Object.keys(input)) {
+            out[k] = await translateObject(input[k], locale);
+        }
+        return out;
+    }
+    return input;
+}
+
+async function translateText(text: string, locale: string): Promise<string> {
+    const request = {
+        parent: `projects/${projectId}/locations/${location}`,
+        contents: [text],
+        mimeType: 'text/plain', // mime types: text/plain, text/html
+        sourceLanguageCode: 'en',
+        targetLanguageCode: locale,
+    };
+    const [response] = await translationClient.translateText(request);
+    if(response.translations.length < 0) {
+        //This probably won't happen I will address it if it ever does
+        throw new Error("No translations in response for text: " + text + " to " + locale);
+    }
+    return response.translations[0].translatedText;
+}
+
+
 
 function walkJson(dir: string, base = ""): string[] {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -43,9 +81,6 @@ async function doTranslate(logger: any) {
         return;
     }
 
-    startLibreTranslate();
-    await waitUntilReady();
-
     for (const locale of targets) {
         logger.info(`[autoTranslate] Translating locale ${locale}…`);
 
@@ -63,8 +98,6 @@ async function doTranslate(logger: any) {
 
         logger.info(`[autoTranslate] Done ${locale}.`);
     }
-
-    stopLibreTranslate();
 }
 
 export default function autoTranslate(): AstroIntegration {

@@ -1,0 +1,41 @@
+{
+  "neurozine": {
+    "title": "Entfesseln Sie Ihr kognitives Potenzial",
+    "description": "Dies ist nicht nur kognitive Unterstützung – es ist Ihr Schlüssel zu mentaler Höchstleistung. Neurozine® wurde für Leistungsträger entwickelt, die sich die nötige Konzentration, das schnelle Erinnerungsvermögen und die tiefe geistige Klarheit wünschen, um im Beruf und im Leben einen Wettbewerbsvorteil zu erlangen.",
+    "benefits": [
+      "Geistige Klarheit, die den Nebel im Kopf durchdringt",
+      "Gedächtnisverbesserung, die Sie überrascht",
+      "Fokussierte Intensität, die die Produktivität steigert",
+      "Kognitive Leistungsfähigkeit, die Sie auszeichnet"
+    ],
+    "productLink": "/pure-plant-new/products/neurozine",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": false
+  },
+  "serophan": {
+    "title": "Präzisions-Neurotransmittersynthese",
+    "description": "Stören Sie Ihre körpereigenen Prozesse nicht – unterstützen Sie sie. Serophan® liefert den reinen, essenziellen Baustein, den Ihr Körper zur natürlichen Serotoninproduktion benötigt. Das Ergebnis: Ausgeglichene Stimmung, erholsamer Schlaf und ein Zustand inneren Wohlbefindens – ganz ohne Nebenwirkungen und die Komplexität pharmazeutischer Eingriffe.†",
+    "benefits": [
+      "Natürliches Stimmungsgleichgewicht ohne medikamentöse Eingriffe",
+      "Schlafqualität, die Ihre Erholung verbessert",
+      "Appetitregulierung zur Unterstützung eines gesunden Gewichts",
+      "Emotionale Stabilität, die Beziehungen stärkt"
+    ],
+    "productLink": "/pure-plant-new/products/serophan",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": true
+  },
+  "pureplantd3": {
+    "title": "Zellgenomische Optimierung",
+    "description": "Ihr Körper benötigt Vitamin D. Deshalb haben wir es perfektioniert. PurePlantD3® ist rein, aus Kiefernholz gewonnen und bioidentisch mit dem Vitamin D3, das Ihr Körper mithilfe von Sonnenlicht produziert. Es liefert die Grundlage für ein starkes Immunsystem, kräftige Knochen und eine positive Stimmung. Ganz ohne Schafsfett.",
+    "benefits": [
+      "Knochenstärke, die ein Leben lang hält",
+      "Immunfunktion, die schützt und stärkt",
+      "Muskelkraft, die sich mit dem Alter verbessert",
+      "Herz-Kreislauf-Gesundheit, die dem Leben Energie verleiht"
+    ],
+    "productLink": "/pure-plant-new/products/pureplantd3",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": false
+  }
+}

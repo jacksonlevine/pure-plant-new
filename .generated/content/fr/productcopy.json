@@ -1,0 +1,41 @@
+{
+  "neurozine": {
+    "title": "Libérez votre potentiel cognitif",
+    "description": "Il ne s'agit pas simplement d'un soutien cognitif, mais de la clé pour atteindre un niveau de performance mentale optimal. Neurozine® est conçu pour les personnes ambitieuses qui recherchent la concentration extrême, la mémoire rapide et la clarté mentale profonde nécessaires pour se démarquer au travail comme dans la vie.",
+    "benefits": [
+      "Une clarté mentale qui dissipe le brouillard cérébral",
+      "Amélioration de la mémoire qui vous surprendra",
+      "Une concentration intense qui transforme la productivité",
+      "Des performances cognitives qui vous distinguent"
+    ],
+    "productLink": "/pure-plant-new/products/neurozine",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": false
+  },
+  "serophan": {
+    "title": "Synthèse de neurotransmetteurs de précision",
+    "description": "Ne perturbez pas votre biologie, soutenez-la. Serophan® fournit l'élément constitutif pur et essentiel que votre corps utilise pour créer naturellement de la sérotonine. Il en résulte une humeur équilibrée, un sommeil réparateur et un état de bien-être et de calme, sans les effets secondaires ni la complexité des interventions médicamenteuses.†",
+    "benefits": [
+      "Équilibre naturel de l'humeur sans intervention médicamenteuse",
+      "Un sommeil de qualité qui transforme votre rétablissement",
+      "Régulation de l'appétit favorisant un poids santé",
+      "Une stabilité émotionnelle qui renforce les relations"
+    ],
+    "productLink": "/pure-plant-new/products/serophan",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": true
+  },
+  "pureplantd3": {
+    "title": "Optimisation génomique cellulaire",
+    "description": "Votre corps a besoin de vitamine D pour fonctionner. C'est pourquoi nous l'avons perfectionnée. Pure, issue du pin et bio-identique à la vitamine D3 que votre corps synthétise grâce au soleil, PurePlantD3® contribue à un système immunitaire robuste, des os solides et une humeur positive. Le tout sans aucune trace de graisse de mouton.",
+    "benefits": [
+      "Une solidité osseuse qui dure toute une vie",
+      "Fonction immunitaire qui protège et renforce",
+      "La force musculaire s'améliore avec l'âge",
+      "La santé cardiovasculaire qui dynamise la vie"
+    ],
+    "productLink": "/pure-plant-new/products/pureplantd3",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
+    "reverse": false
+  }
+}

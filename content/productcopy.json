@@ -9,8 +9,7 @@
       "Cognitive performance that sets you apart"
     ],
     "productLink": "/pure-plant-new/products/neurozine",
-    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
-    "reverse": false
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1"
   },
   "serophan": {
     "title": "Precision Neurotransmitter Synthesis",
@@ -22,20 +21,18 @@
       "Emotional stability that enhances relationships"
     ],
     "productLink": "/pure-plant-new/products/serophan",
-    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
-    "reverse": true
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1"
   },
   "pureplantd3": {
     "title": "Cellular Genomic Optimization",
     "description": "Your body runs on Vitamin D. That's why we perfected it. Pure, pine-derived, and bioidentical to the D3 your body makes from the sun, PurePlantD3® delivers foundational support for robust immunity, strong bones, and a positive mood. All without a trace of sheep's grease.",
-    "benefits": [
+    "benefits": [ 
       "Bone strength that lasts a lifetime",
       "Immune function that protects and enhances",
       "Muscle strength that improves with age",
       "Cardiovascular health that energizes life"
     ],
     "productLink": "/pure-plant-new/products/pureplantd3",
-    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
-    "reverse": false
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1"
   }
 }

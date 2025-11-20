@@ -1,41 +1,38 @@
 {
   "neurozine": {
-    "title": "Desbloquea tu potencial cognitivo",
-    "description": "Esto no es solo apoyo cognitivo, es tu clave para desbloquear un estado de máximo rendimiento mental. Neurozine® está diseñado para el objetivo del láser, el recuerdo rápido y la profunda claridad mental necesaria para ganar un borde competitivo en el trabajo y en la vida.",
+    "title": "Desata tu potencial cognitivo",
+    "description": "Esto no es solo apoyo cognitivo: es la clave para alcanzar un estado de máximo rendimiento mental. Neurozine® está diseñado para personas de alto rendimiento que buscan la concentración absoluta, la rapidez de memoria y la profunda claridad mental necesarias para obtener una ventaja competitiva en el trabajo y en la vida.",
     "benefits": [
-      "La claridad mental que corta a través de la niebla del cerebro",
-      "Mejora de memoria que te sorprende",
-      "Intensidad focal que transforma la productividad",
-      "Rendimiento cognitivo que te distingue"
+      "Claridad mental que disipa la confusión mental",
+      "Mejora de la memoria que te sorprenderá",
+      "Concentración que transforma la productividad",
+      "Un rendimiento cognitivo que te distingue"
     ],
-    "productLink": "/pure-plant-new/products/neurozine",
-    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
-    "reverse": false
+    "productLink": "/productos-nuevos-de-plantas-puras/neurozine",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1"
   },
   "serophan": {
-    "title": "Neurotransmisor de precisión Síntesis",
-    "description": "No interrumpas tu biología, mantenla. Serophan® proporciona el bloque de construcción puro y esencial que su cuerpo utiliza para crear serotonina natural. El resultado es un estado de ánimo equilibrado, sueño tranquilo y un estado de bienestar tranquilo, sin los efectos secundarios o complejidades de las intervenciones farmacéuticas.†",
+    "title": "Síntesis de neurotransmisores de precisión",
+    "description": "No alteres tu biología, apóyala. Serophan® te proporciona el componente esencial y puro que tu cuerpo utiliza para crear serotonina de forma natural. El resultado es un estado de ánimo equilibrado, un sueño reparador y una sensación de bienestar y calma, sin los efectos secundarios ni las complejidades de los tratamientos farmacéuticos.†",
     "benefits": [
-      "Equilibrio de humor natural sin trastornos farmacéuticos",
+      "Equilibrio natural del estado de ánimo sin alteraciones farmacológicas",
       "Calidad del sueño que transforma tu recuperación",
-      "Regulación competitiva que soporta peso saludable",
+      "Regulación del apetito que favorece un peso saludable",
       "Estabilidad emocional que mejora las relaciones"
     ],
-    "productLink": "/pure-plant-new/products/serophan",
-    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
-    "reverse": true
+    "productLink": "/productos-planta-puros-nuevos/serophan",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1"
   },
   "pureplantd3": {
     "title": "Optimización genómica celular",
-    "description": "Su cuerpo funciona con vitamina D. Por eso lo perfeccionamos. Puro, pinos, y bioidentico al D3 que tu cuerpo hace desde el sol, PurePlantD3® ofrece soporte fundacional para la inmunidad robusta, huesos fuertes y un estado de ánimo positivo. Todo sin rastro de grasa de ovejas.",
+    "description": "Tu cuerpo funciona con vitamina D. Por eso la hemos perfeccionado. Pura, derivada del pino y bioidéntica a la D3 que tu cuerpo produce a partir del sol, PurePlantD3® proporciona un apoyo fundamental para una inmunidad robusta, huesos fuertes y un estado de ánimo positivo. Todo ello sin rastro de grasa de oveja.",
     "benefits": [
-      "Fuerza ósea que dura toda la vida",
-      "Función inmune que protege y mejora",
+      "Fortaleza ósea para toda la vida",
+      "Función inmunológica que protege y mejora",
       "Fuerza muscular que mejora con la edad",
       "Salud cardiovascular que energiza la vida"
     ],
-    "productLink": "/pure-plant-new/products/pureplantd3",
-    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1",
-    "reverse": false
+    "productLink": "/productos-puros-plantas-nuevos/productos/pureplantd3",
+    "modelSrc": "/pure-plant-new/models/bottleexample.glb?v=1"
   }
 }
