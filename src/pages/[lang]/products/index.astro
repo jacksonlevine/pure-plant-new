@@ -6,9 +6,7 @@ import { defaultSort, sorting } from "@/lib/constants";
 import {
     getCollectionProducts,
     getCollections,
-    getHighestProductPrice,
-    getProducts,
-    getVendors,
+    getProducts
 } from "@/lib/shopify";
 import type { PageInfo, Product } from "@/lib/shopify/types";
 
@@ -45,7 +43,6 @@ const { sortKey, reverse } =
 sorting.find((item) => item.slug === sort) || defaultSort;
 
 let productsData: any;
-let vendorsWithCounts: { vendor: string; productCount: number }[] = [];
 let categoriesWithCounts: { category: string; productCount: number }[] = [];
 
 if (searchValue || brand || minPrice || maxPrice || category || tag) {
@@ -109,13 +106,6 @@ if (searchValue || brand || minPrice || maxPrice || category || tag) {
         ),
     ];
 
-    vendorsWithCounts = uniqueVendors.map((vendor: string) => {
-        const productCount = (productsData?.products || []).filter(
-            (product: Product) => product?.vendor === vendor
-        ).length;
-        return { vendor, productCount };
-    });
-
     categoriesWithCounts = uniqueCategories.map((category: string) => {
         const productCount = ((productsData?.products as Product[]) || []).filter(
             (product: Product) =>
@@ -140,7 +130,6 @@ if (searchValue || brand || minPrice || maxPrice || category || tag) {
 }
 
 const categories = await getCollections();
-const vendors = await getVendors({});
 
 const tags = [
     ...new Set(
@@ -149,8 +138,6 @@ const tags = [
         )?.products.flatMap((product: Product) => product.tags)
     ),
 ];
-
-const maxPriceData = await getHighestProductPrice();
 
 const initialProducts = productsData.products;
 const initialPageInfo = productsData.pageInfo;
@@ -240,10 +227,7 @@ const productsStructuredData = [
     <div class="h-[12rem] lg:h-[6rem]"></div>
     <ProductLayouts
             categories={categories}
-            vendors={vendors}
             tags={tags}
-            maxPriceData={maxPriceData}
-            vendorsWithCounts={vendorsWithCounts}
             categoriesWithCounts={categoriesWithCounts}
             client:only="react"
     />
@@ -253,10 +237,7 @@ const productsStructuredData = [
             <div class="col-3 hidden lg:block -mt-14">
                 <ProductFilters
                         categories={categories}
-                        vendors={vendors}
                         tags={tags}
-                        maxPriceData={maxPriceData!}
-                        vendorsWithCounts={vendorsWithCounts}
                         categoriesWithCounts={categoriesWithCounts}
                         client:only="react"
                 />

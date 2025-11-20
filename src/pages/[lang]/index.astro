@@ -14,16 +14,17 @@ import type {
     InferGetStaticPropsType,
     GetStaticPaths,
 } from "astro";
+import type {HeroCopy} from "../../../content/types";
 
-
+import Hero from "../../newcomponents/Hero";
 //Astro stuff telling it what static paths we have. 
 export const prerender = true;
 export function getStaticPaths() {
     return getLocaleStaticPaths();
-} satisfies GetStaticPaths;
+};
 
 const locale = resolveLocaleFromParams(Astro.params) as LocaleCode;
-const heroCopy = loadContent(locale, 'herocopy.json');
+const heroCopy = loadContent(locale, 'herocopy.json') as HeroCopy[];
 const heroTestimonials = loadContent(locale, 'testimonials/primaryhero.json');
 const productInfo = loadContent(locale, 'productcopy.json');
 
@@ -122,7 +123,7 @@ const productPaths = {
         structuredData={homepageStructuredData}
         lang={locale}
 >
-    <PrimaryHeroSection isTopElement={true} copy={heroCopy} testimonials={heroTestimonials} ctaHref={localizedPath(locale, '/productoverview')}/>
+    <Hero props={heroCopy[1]} />
     <ProductsStrip productsCopy={productInfo} productPaths={productPaths} />
     <TrustSignalsCertificationShowcase client:load/>
     <div class="w-full text-center min-h-[10rem]">

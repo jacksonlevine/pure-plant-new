@@ -20,7 +20,7 @@ export const getProductsQuery = /* GraphQL */ `
       sortKey: $sortKey
       reverse: $reverse
       query: $query
-      first: 12
+      first: 100
       after: $cursor
     ) {
       pageInfo {
@@ -38,32 +38,3 @@ export const getProductsQuery = /* GraphQL */ `
   ${productFragment}
 `;
 
-export const getProductRecommendationsQuery = /* GraphQL */ `
-  query getProductRecommendations($productId: ID!) {
-    productRecommendations(productId: $productId) {
-      ...product
-    }
-  }
-  ${productFragment}
-`;
-
-export const getHighestProductPriceQuery = /* GraphQL */ `
-  query getHighestProductPrice {
-    products(first: 1, sortKey: PRICE, reverse: true) {
-      edges {
-        node {
-          variants(first: 1) {
-            edges {
-              node {
-                price {
-                  amount
-                  currencyCode
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;

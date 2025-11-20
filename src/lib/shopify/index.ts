@@ -22,15 +22,12 @@ import {
   getCollectionQuery,
   getCollectionsQuery,
 } from "./queries/collection";
-import { getMenuQuery } from "./queries/menu";
-import { getPageQuery, getPagesQuery } from "./queries/page";
+
 import {
-  getHighestProductPriceQuery,
   getProductQuery,
-  getProductRecommendationsQuery,
   getProductsQuery,
 } from "./queries/product";
-import { getVendorsQuery } from "./queries/vendor";
+
 import type {
   Cart,
   Collection,
@@ -135,22 +132,24 @@ export async function shopifyFetch<T>({
   }
 }
 
-const removeEdgesAndNodes = (array: Connection<any>) => {
+const flattenEdgesAndNodes = (array: Connection<any>) => {
   return array.edges.map((edge) => edge?.node);
 };
 
 const reshapeCart = (cart: ShopifyCart): Cart => {
-  if (!cart.cost?.totalTaxAmount) {
-    cart.cost.totalTaxAmount = {
-      amount: "0.0",
-      currencyCode: "USD",
-    };
-  }
+    const currency = cart.cost.totalAmount.currencyCode;
 
-  return {
-    ...cart,
-    lines: removeEdgesAndNodes(cart.lines),
-  };
+    return {
+        ...cart,
+        cost: {
+            ...cart.cost,
+            totalTaxAmount: cart.cost.totalTaxAmount ?? {
+                amount: "0.0",
+                currencyCode: currency,
+            },
+        },
+        lines: flattenEdgesAndNodes(cart.lines),
+    };
 };
 
 const reshapeCollection = (
@@ -183,7 +182,7 @@ const reshapeCollections = (collections: ShopifyCollection[]) => {
 };
 
 const reshapeImages = (images: Connection<Image>, productTitle: string) => {
-  const flattened = removeEdgesAndNodes(images);
+  const flattened = flattenEdgesAndNodes(images);
 
   return flattened.map((image) => {
     const filename = image.url.match(/.*\/(.*)\..*/)[1];
@@ -210,7 +209,7 @@ const reshapeProduct = (
   return {
     ...rest,
     images: reshapeImages(images, product.title),
-    variants: removeEdgesAndNodes(variants),
+    variants: flattenEdgesAndNodes(variants),
   };
 };
 
@@ -346,13 +345,13 @@ export async function getCollectionProducts({
     return { pageInfo: null, products: [] };
   }
 
-  // return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+  // return reshapeProducts(flattenEdgesAndNodes(res.body.data.collection.products));
   const pageInfo = res.body.data?.collection?.products?.pageInfo;
 
   return {
     pageInfo,
     products: reshapeProducts(
-      removeEdgesAndNodes(res.body.data.collection.products),
+      flattenEdgesAndNodes(res.body.data.collection.products),
     ),
   };
 }
@@ -408,7 +407,7 @@ export async function getCollections(): Promise<Collection[]> {
     query: getCollectionsQuery,
     tags: [TAGS.collections],
   });
-  const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
+  const shopifyCollections = flattenEdgesAndNodes(res.body?.data?.collections);
   const collections = [
     ...reshapeCollections(shopifyCollections).filter(
       (collection) => !collection.handle.startsWith("hidden"),
@@ -418,42 +417,6 @@ export async function getCollections(): Promise<Collection[]> {
   return collections;
 }
 
-export async function getMenu(handle: string): Promise<Menu[]> {
-  const res = await shopifyFetch<ShopifyMenuOperation>({
-    query: getMenuQuery,
-    tags: [TAGS.collections],
-    variables: {
-      handle,
-    },
-  });
-
-  return (
-    res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
-      title: item.title,
-      path: item.url
-        .replace(domain, "")
-        .replace("/collections", "/search")
-        .replace("/pages", ""),
-    })) || []
-  );
-}
-
-export async function getPage(handle: string): Promise<Page> {
-  const res = await shopifyFetch<ShopifyPageOperation>({
-    query: getPageQuery,
-    variables: { handle },
-  });
-
-  return res.body.data.pageByHandle;
-}
-
-export async function getPages(): Promise<Page[]> {
-  const res = await shopifyFetch<ShopifyPagesOperation>({
-    query: getPagesQuery,
-  });
-
-  return removeEdgesAndNodes(res.body.data.pages);
-}
 
 export async function getProduct(handle: string): Promise<Product | undefined> {
   const res = await shopifyFetch<ShopifyProductOperation>({
@@ -465,66 +428,6 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
   });
 
   return reshapeProduct(res.body.data.product, false);
-}
-
-export async function getProductRecommendations(
-  productId: string,
-): Promise<Product[]> {
-  const res = await shopifyFetch<ShopifyProductRecommendationsOperation>({
-    query: getProductRecommendationsQuery,
-    tags: [TAGS.products],
-    variables: {
-      productId,
-    },
-  });
-
-  return reshapeProducts(res.body.data.productRecommendations);
-}
-
-export async function getVendors({
-  query,
-  reverse,
-  sortKey,
-}: {
-  query?: string;
-  reverse?: boolean;
-  sortKey?: string;
-}): Promise<{ vendor: string; productCount: number }[]> {
-  const res = await shopifyFetch<ShopifyProductsOperation>({
-    query: getVendorsQuery,
-    tags: [TAGS.products],
-    variables: {
-      query,
-      reverse,
-      sortKey,
-    },
-  });
-
-  const products = removeEdgesAndNodes(res.body.data.products);
-
-  // Create an array to store objects with vendor names and product counts
-  const vendorProductCounts: { vendor: string; productCount: number }[] = [];
-
-  // Process the products and count them by vendor
-  products.forEach((product) => {
-    const vendor = product.vendor;
-    if (vendor) {
-      // Check if the vendor is already in the array
-      const existingVendor = vendorProductCounts.find(
-        (v) => v.vendor === vendor,
-      );
-
-      if (existingVendor) {
-        // Increment the product count for the existing vendor
-        existingVendor.productCount++;
-      } else {
-        // Add a new vendor entry
-        vendorProductCounts.push({ vendor, productCount: 1 });
-      }
-    }
-  });
-
-  return vendorProductCounts;
 }
 
 export async function getTags({
@@ -546,7 +449,7 @@ export async function getTags({
     },
   });
 
-  return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+  return reshapeProducts(flattenEdgesAndNodes(res.body.data.products));
 }
 
 export async function getProducts({
@@ -575,25 +478,6 @@ export async function getProducts({
 
   return {
     pageInfo,
-    products: reshapeProducts(removeEdgesAndNodes(res.body.data.products)),
+    products: reshapeProducts(flattenEdgesAndNodes(res.body.data.products)),
   };
-}
-
-export async function getHighestProductPrice(): Promise<{
-  amount: string;
-  currencyCode: string;
-} | null> {
-  try {
-    const res = await shopifyFetch<any>({
-      query: getHighestProductPriceQuery,
-    });
-
-    const highestProduct = res?.body?.data?.products?.edges[0]?.node;
-    const highestProductPrice = highestProduct?.variants?.edges[0]?.node?.price;
-
-    return highestProductPrice || null;
-  } catch (error) {
-    console.log("Error fetching highest product price:", error);
-    throw error;
-  }
 }

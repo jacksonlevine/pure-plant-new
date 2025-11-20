@@ -7,17 +7,11 @@ import RangeSlider from "./rangeSlider/RangeSlider";
 
 const ProductFilters = ({
                             categories,
-                            vendors,
                             tags,
-                            maxPriceData,
-                            vendorsWithCounts,
                             categoriesWithCounts,
                         }: {
     categories: ShopifyCollection[];
-    vendors: { vendor: string; productCount: number }[];
     tags: string[];
-    maxPriceData: { amount: string; currencyCode: string };
-    vendorsWithCounts: { vendor: string; productCount: number }[];
     categoriesWithCounts: { category: string; productCount: number }[];
 }) => {
     const [searchParams, setSearchParams] = useState(
@@ -60,13 +54,6 @@ const ProductFilters = ({
 
     return (
         <div>
-            <div>
-                <h5 className="mb-2 lg:text-xl">Select Price Range</h5>
-                <hr className="border-border dark:border-darkmode-border" />
-                <div className="pt-4">
-                    <RangeSlider maxPriceData={maxPriceData} />
-                </div>
-            </div>
 
             <div>
                 <h5 className="mb-2 mt-4 lg:mt-6 lg:text-xl">Product Categories</h5>
@@ -98,47 +85,7 @@ const ProductFilters = ({
                     ))}
                 </ul>
             </div>
-
-            {vendors && (
-                <div>
-                    <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brands</h5>
-                    <hr className="border-border dark:border-darkmode-border" />
-                    <ul className="mt-4 space-y-4">
-                        {vendors.map((vendor) => (
-                            <li
-                                key={vendor.vendor}
-                                className={`flex items-center justify-between cursor-pointer text-text-light dark:text-darkmode-text-light`}
-                                onClick={() => handleBrandClick(vendor.vendor)}
-                            >
-                                {searchParams.has("b") &&
-                                !searchParams.has("c") &&
-                                !searchParams.has("minPrice") &&
-                                !searchParams.has("maxPrice") &&
-                                !searchParams.has("q") &&
-                                !searchParams.has("t") ? (
-                                    <span>
-                    {vendor.vendor} ({vendor.productCount})
-                  </span>
-                                ) : (
-                                    <span>
-                    {vendorsWithCounts.length > 0
-                        ? `${vendor.vendor} (${vendorsWithCounts.find(
-                            (v) => v.vendor === vendor.vendor
-                        )?.productCount || 0
-                        })`
-                        : `${vendor.vendor} (${vendor.productCount})`}
-                  </span>
-                                )}
-                                <div className="h-4 w-4 rounded-sm flex items-center justify-center border border-border dark:border-border/40">
-                                    {selectedBrands.includes(slugify(vendor.vendor.toLowerCase())) && (
-                                        <BsCheckLg size={16} />
-                                    )}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            
 
             {tags.length > 0 && (
                 <div>

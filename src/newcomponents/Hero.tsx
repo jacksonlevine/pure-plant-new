@@ -1,6 +1,11 @@
 
 import type {HeroCopy} from "../../content/types";
-export default function Hero(props: HeroCopy) {
+
+type HeroProps = {
+    props: HeroCopy;
+};
+
+export default function Hero({props}: HeroProps) {
     return (
         <div className="bg-white">
             <div className="relative bg-gray-900">
